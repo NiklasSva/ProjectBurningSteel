@@ -15,7 +15,7 @@ public class RestartScript : MonoBehaviour
     {
 	    if(Input.GetKey("r"))
         {
-            Application.LoadLevel("FirstPlayablePlayState");
+            Application.LoadLevel("testingLevel");
         }
         
         if(Input.GetKey("escape"))

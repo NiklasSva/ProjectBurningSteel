@@ -8,6 +8,8 @@ public class BasicVehicleControl : MonoBehaviour
     public float turnSpeed = 50.0f;
     public float jumpHeight = 20.0f;
 
+    public float maxSpeed = 200.0f;
+
     public Transform rayCastObject;
     public LayerMask raycastLayermask;
     public float rayCastDistance;
@@ -44,6 +46,14 @@ public class BasicVehicleControl : MonoBehaviour
                 rigidbody.velocity += transform.up * jumpHeight * Time.deltaTime;
             }
         }
+
+        Vector3 vel = rigidbody.velocity;
+        if (vel.magnitude > maxSpeed)
+        {
+            vel.Normalize();
+            vel *= maxSpeed;
+            rigidbody.velocity = vel;
+        }
     }
 
     void VehicleInput()
@@ -53,11 +63,15 @@ public class BasicVehicleControl : MonoBehaviour
         
         if (Input.GetKey("w"))
         {
-            transform.Translate(Vector3.forward * moveDistance);
+            //transform.Translate(Vector3.forward * moveDistance);
+
+            rigidbody.velocity += transform.forward * moveDistance;
         }
         if (Input.GetKey("s"))
         {
-            transform.Translate(-Vector3.forward * moveDistance);
+            //transform.Translate(-Vector3.forward * moveDistance);
+
+            rigidbody.velocity += -transform.forward * moveDistance;
         }
 
         if (Input.GetKey("a"))
