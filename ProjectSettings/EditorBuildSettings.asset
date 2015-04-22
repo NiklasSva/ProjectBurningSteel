@@ -6,6 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/FirstPlayablePlayState.unity
+    path: Assets/Scenes/testingLevel.unity
   - enabled: 1
     path: Assets/Scenes/FirstPlayableWin.unity
