@@ -24,9 +24,9 @@ GameObject:
   m_Component:
   - 4: {fileID: 486348}
   - 33: {fileID: 3330722}
-  - 64: {fileID: 6465320}
   - 23: {fileID: 2378252}
   - 114: {fileID: 11457678}
+  - 65: {fileID: 6560638}
   m_Layer: 0
   m_Name: KillFloor
   m_TagString: Untagged
@@ -56,7 +56,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 105850}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 10, y: 9, z: -413}
+  m_LocalPosition: {x: -588.617188, y: 518.732422, z: 35.7407265}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 456242}
@@ -118,8 +118,8 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 124430}
   m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
---- !u!64 &6465320
-MeshCollider:
+--- !u!65 &6560638
+BoxCollider:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
@@ -128,8 +128,8 @@ MeshCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Convex: 1
-  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
+  m_Size: {x: 10, y: 2.22044605e-16, z: 10}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &11457678
 MonoBehaviour:
   m_ObjectHideFlags: 1

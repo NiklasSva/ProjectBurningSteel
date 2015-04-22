@@ -95,11 +95,11 @@ GameObject:
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 440069614}
-  - 33: {fileID: 23317128}
+  - 4: {fileID: 23317130}
   - 136: {fileID: 23317127}
   - 23: {fileID: 23317126}
   - 96: {fileID: 23317129}
+  - 33: {fileID: 23317128}
   m_Layer: 0
   m_Name: FrontThrusterLeft
   m_TagString: Untagged
@@ -199,6 +199,18 @@ TrailRenderer:
       rgba: 402653420
   m_MinVertexDistance: .100000001
   m_Autodestruct: 0
+--- !u!4 &23317130
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 23317125}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 2
 --- !u!1 &44632658
 GameObject:
   m_ObjectHideFlags: 0
@@ -250,11 +262,15 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 5
 --- !u!4 &45747701
 Transform:
   m_PrefabParentObject: {fileID: 430624, guid: 252f293a8d8906141bbd417f616f7a74, type: 2}
   m_PrefabInternal: {fileID: 659451288}
+--- !u!4 &68700262
+Transform:
+  m_PrefabParentObject: {fileID: 447208, guid: 02117703e733b6e46bdc8120fb375242, type: 2}
+  m_PrefabInternal: {fileID: 769518108}
 --- !u!4 &90962922
 Transform:
   m_PrefabParentObject: {fileID: 430624, guid: 252f293a8d8906141bbd417f616f7a74, type: 2}
@@ -355,6 +371,10 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 252f293a8d8906141bbd417f616f7a74, type: 2}
   m_IsPrefabParent: 0
+--- !u!4 &223322687
+Transform:
+  m_PrefabParentObject: {fileID: 430624, guid: 252f293a8d8906141bbd417f616f7a74, type: 2}
+  m_PrefabInternal: {fileID: 477558855}
 --- !u!1 &240522195
 GameObject:
   m_ObjectHideFlags: 0
@@ -542,7 +562,7 @@ Transform:
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 9
 --- !u!1 &346911856
 GameObject:
   m_ObjectHideFlags: 0
@@ -928,12 +948,10 @@ Transform:
   m_LocalPosition: {x: 103.699997, y: -5.19999981, z: -410}
   m_LocalScale: {x: 2.71187735, y: 1, z: 4}
   m_Children:
-  - {fileID: 1223546095}
   - {fileID: 2044608184}
-  - {fileID: 440069614}
   - {fileID: 2065739482}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 8
 --- !u!114 &696342107
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -949,9 +967,11 @@ MonoBehaviour:
   speed: 50
   turnSpeed: 180
   jumpHeight: 300
-  maxSpeed: 100
-  hoverForce: 65
-  hoverHeight: 3.5
+  rayCastObject: {fileID: 0}
+  raycastLayermask:
+    serializedVersion: 2
+    m_Bits: 0
+  rayCastDistance: 0
 --- !u!114 &696342108
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1044,8 +1064,8 @@ MonoBehaviour:
   thrusterDistance: 2
   thrusters:
   - {fileID: 2044608184}
-  - {fileID: 1223546095}
-  - {fileID: 440069614}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 2065739482}
 --- !u!4 &705846895
 Transform:
@@ -1273,7 +1293,7 @@ Transform:
   - {fileID: 1267770729}
   - {fileID: 770441021}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 6
 --- !u!4 &878103548
 Transform:
   m_PrefabParentObject: {fileID: 430624, guid: 252f293a8d8906141bbd417f616f7a74, type: 2}
@@ -1594,7 +1614,7 @@ Transform:
   m_LocalScale: {x: 2.71187663, y: 1.74650502, z: 5.18794537}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
 --- !u!114 &1237760761
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1736,12 +1756,12 @@ Transform:
   - {fileID: 1133107898}
   - {fileID: 1994800604}
   - {fileID: 2033679213}
-  - {fileID: 370896698}
+  - {fileID: 223322687}
   - {fileID: 1048109344}
   - {fileID: 882429973}
   - {fileID: 1140263501}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 7
 --- !u!4 &1456248841
 Transform:
   m_PrefabParentObject: {fileID: 430624, guid: 252f293a8d8906141bbd417f616f7a74, type: 2}
@@ -1869,11 +1889,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e31fdc49568570f42955b5490aae9254, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 696342106}
-  distanceUp: 2
-  distanceBack: -10
-  minimumHeight: -2
-  rotationSpeed: 10
 --- !u!81 &1625719217
 AudioListener:
   m_ObjectHideFlags: 0
@@ -1937,12 +1952,12 @@ Transform:
   m_PrefabParentObject: {fileID: 412644, guid: 02117703e733b6e46bdc8120fb375242, type: 2}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1625719215}
-  m_LocalRotation: {x: -2.42178153e-08, y: .988890231, z: -.148647889, w: -1.61110677e-07}
-  m_LocalPosition: {x: -.929997444, y: 2.15999985, z: -402.200012}
-  m_LocalScale: {x: 2.71187663, y: 1.74650502, z: 5.18794537}
+  m_LocalRotation: {x: .148647889, y: 0, z: 0, w: .988890231}
+  m_LocalPosition: {x: -0, y: 1.0799998, z: -1.94999695}
+  m_LocalScale: {x: 1, y: 1.63329005, z: 1.63328922}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_Father: {fileID: 68700262}
+  m_RootOrder: 4
 --- !u!1001 &1665551803
 Prefab:
   m_ObjectHideFlags: 0
@@ -2240,7 +2255,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
 --- !u!1001 &1978838508
 Prefab:
   m_ObjectHideFlags: 0
@@ -2356,7 +2371,7 @@ Transform:
   m_LocalScale: {x: .110624477, y: .100000001, z: .075000003}
   m_Children: []
   m_Father: {fileID: 696342106}
-  m_RootOrder: 1
+  m_RootOrder: 0
 --- !u!4 &2065739482
 Transform:
   m_ObjectHideFlags: 0
@@ -2368,7 +2383,7 @@ Transform:
   m_LocalScale: {x: .110624477, y: .100000001, z: .075000003}
   m_Children: []
   m_Father: {fileID: 696342106}
-  m_RootOrder: 3
+  m_RootOrder: 1
 --- !u!1001 &2118832668
 Prefab:
   m_ObjectHideFlags: 0
@@ -2422,11 +2437,11 @@ GameObject:
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 1223546095}
-  - 33: {fileID: 2123509718}
+  - 4: {fileID: 2123509720}
   - 136: {fileID: 2123509717}
   - 23: {fileID: 2123509716}
   - 96: {fileID: 2123509719}
+  - 33: {fileID: 2123509718}
   m_Layer: 0
   m_Name: BackThrusterRight
   m_TagString: Untagged
@@ -2526,3 +2541,15 @@ TrailRenderer:
       rgba: 402653420
   m_MinVertexDistance: .100000001
   m_Autodestruct: 0
+--- !u!4 &2123509720
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2123509715}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 3
