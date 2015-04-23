@@ -9,3 +9,5 @@ EditorBuildSettings:
     path: Assets/Scenes/testingLevel.unity
   - enabled: 1
     path: Assets/Scenes/FirstPlayableWin.unity
+  - enabled: 1
+    path: Assets/Scenes/PreAlpha.unity

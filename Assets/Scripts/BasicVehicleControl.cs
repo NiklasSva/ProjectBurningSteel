@@ -10,6 +10,9 @@ public class BasicVehicleControl : MonoBehaviour
     public float jumpHeight = 20.0f;
 
     public float maxSpeed = 200.0f;
+    public float boostMultiplier = 2.0f;
+    private float maxSpeedBoosted;
+    private float oldMaxSpeed;
 
     public Transform rayCastObject;
     public LayerMask raycastLayermask;
@@ -21,11 +24,26 @@ public class BasicVehicleControl : MonoBehaviour
 	void Awake () 
     {
         rigidbody = GetComponent<Rigidbody>();
+        maxSpeedBoosted = maxSpeed * boostMultiplier;
+        oldMaxSpeed = maxSpeed;
 	}
 
     // Update is called once per frame
     void Update()
     {
+
+        // Boost
+        if (Input.GetButton("X"))
+        {
+            maxSpeed = maxSpeedBoosted;
+            rigidbody.AddForce(transform.forward * speed * 2);
+        }
+        else
+        {
+            maxSpeed = oldMaxSpeed;
+        }
+
+        
 
         Rotation();
 
@@ -70,6 +88,7 @@ public class BasicVehicleControl : MonoBehaviour
         }
 
 
+        // Accelerate and Decelerate
         if (Mathf.Round(Input.GetAxis("Triggers")) < 0)
         {
             Debug.Log("RightTrigger!");
@@ -81,8 +100,7 @@ public class BasicVehicleControl : MonoBehaviour
             rigidbody.velocity += -transform.forward * moveDistance;
         }
 
-
-
+        // Steering
         Vector3 _rotVector = new Vector3(0.0f, turnSpeed, 0.0f) * Time.deltaTime * Input.GetAxis("LeftJoystickX");
         transform.Rotate(_rotVector * Time.deltaTime);
                
