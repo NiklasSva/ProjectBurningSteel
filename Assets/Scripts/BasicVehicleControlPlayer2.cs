@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class BasicVehicleControl : MonoBehaviour 
+public class BasicVehicleControlPlayer2 : MonoBehaviour 
 {
 
     public float speed = 50.0f;
@@ -20,7 +20,7 @@ public class BasicVehicleControl : MonoBehaviour
 	// Use this for initialization
 	void Awake () 
     {
-        rigidbody = GetComponent<Rigidbody>();
+        rigidbody = this.GetComponent<Rigidbody>();
 	}
 
     // Update is called once per frame
@@ -42,9 +42,9 @@ public class BasicVehicleControl : MonoBehaviour
         {
             Debug.DrawRay(rayCastObject.position, rayCastObject.up * -1, Color.green);
 
-            if (Input.GetButtonDown("A") || Input.GetButtonDown("Space"))
+            if (Input.GetButtonDown("A_P2") || Input.GetButtonDown("Space"))
             {
-                Debug.Log("JUMP!");
+                Debug.Log("JUMP 2!");
                 rigidbody.velocity += transform.up * jumpHeight * Time.deltaTime;
             }
 
@@ -70,20 +70,20 @@ public class BasicVehicleControl : MonoBehaviour
         }
 
 
-        if (Mathf.Round(Input.GetAxis("Triggers")) < 0)
+        if (Mathf.Round(Input.GetAxis("Triggers_P2")) < 0)
         {
-            Debug.Log("RightTrigger!");
+            Debug.Log("RightTrigger 2!");
             rigidbody.velocity += transform.forward * moveDistance;
         }
-        if (Mathf.Round(Input.GetAxis("Triggers")) > 0)
+        if (Mathf.Round(Input.GetAxis("Triggers_P2")) > 0)
         {
-            Debug.Log("RightTrigger!");
+            Debug.Log("RightTrigger 2!");
             rigidbody.velocity += -transform.forward * moveDistance;
         }
 
 
 
-        Vector3 _rotVector = new Vector3(0.0f, turnSpeed, 0.0f) * Time.deltaTime * Input.GetAxis("LeftJoystickX");
+        Vector3 _rotVector = new Vector3(0.0f, turnSpeed, 0.0f) * Time.deltaTime * Input.GetAxis("LeftJoystickX_P2");
         transform.Rotate(_rotVector * Time.deltaTime);
                
         
@@ -113,10 +113,10 @@ public class BasicVehicleControl : MonoBehaviour
 
     void Rotation()
     {
-        Vector3 _rotVector = new Vector3(0.0f, 0.0f, -turnSpeed) * Time.deltaTime * Input.GetAxis("RightJoystickX");
+        Vector3 _rotVector = new Vector3(0.0f, 0.0f, -turnSpeed) * Time.deltaTime * Input.GetAxis("RightJoystickX_P2");
         transform.Rotate(_rotVector * Time.deltaTime);
 
-        _rotVector = new Vector3(-turnSpeed, 0.0f, 0.0f) * Time.deltaTime * Input.GetAxis("RightJoystickY");
+        _rotVector = new Vector3(-turnSpeed, 0.0f, 0.0f) * Time.deltaTime * Input.GetAxis("RightJoystickY_P2");
         transform.Rotate(_rotVector * Time.deltaTime);
 
 

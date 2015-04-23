@@ -44,7 +44,7 @@ public class RoadGravity : MonoBehaviour
                 Vector3 accel = -this.transform.up * gravitationalAcceleration * Time.deltaTime * gravityMultiplier;
 
                 // Apply the acceleration to the Transform objects rigidbody velocity
-                keyValuePair.Value.GetComponent<Rigidbody>().velocity += accel;
+                keyValuePair.Value.GetComponent<Rigidbody>().velocity += accel * keyValuePair.Value.GetComponent<Rigidbody>().mass;
             }
         }
     }

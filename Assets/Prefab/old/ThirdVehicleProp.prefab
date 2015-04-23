@@ -427,6 +427,7 @@ MonoBehaviour:
   speed: 1000
   turnSpeed: 180
   jumpHeight: 1000
+  maxSpeed: 200
   rayCastObject: {fileID: 0}
   raycastLayermask:
     serializedVersion: 2
