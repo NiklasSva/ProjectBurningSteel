@@ -8,6 +8,7 @@ TagManager:
   - KillFloor
   - Road
   - Ignore
+  - Recharge
   layers:
   - Default
   - TransparentFX

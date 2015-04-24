@@ -19,10 +19,12 @@ public class BasicVehicleControlPlayer2 : MonoBehaviour
     public float rayCastDistance;
 
     private Rigidbody rigidbody;
+    private EnergyScript energyScript;
 
 	// Use this for initialization
 	void Awake () 
     {
+        energyScript = GetComponent<EnergyScript>();
         rigidbody = this.GetComponent<Rigidbody>();
         maxSpeedBoosted = maxSpeed * boostMultiplier;
         oldMaxSpeed = maxSpeed;
@@ -33,10 +35,11 @@ public class BasicVehicleControlPlayer2 : MonoBehaviour
     {
 
         // Boost
-        if (Input.GetButton("X_P2"))
+        if (Input.GetButton("X_P2") && energyScript.currentEnergy > 0.0f)
         {
             maxSpeed = maxSpeedBoosted;
             rigidbody.AddForce(transform.forward * speed * 2);
+            energyScript.BoostCost();
         }
         else
         {
@@ -62,7 +65,6 @@ public class BasicVehicleControlPlayer2 : MonoBehaviour
 
             if (Input.GetButtonDown("A_P2") || Input.GetButtonDown("Space"))
             {
-                Debug.Log("JUMP 2!");
                 rigidbody.velocity += transform.up * jumpHeight * Time.deltaTime;
             }
 
@@ -82,20 +84,13 @@ public class BasicVehicleControlPlayer2 : MonoBehaviour
     {
         float moveDistance = speed * Time.deltaTime;
 
-        if (Input.GetButtonDown("B_all"))
-        {
-            Debug.Log("lol");
-        }
-
         // Accelerate and Decelerate
         if (Mathf.Round(Input.GetAxis("Triggers_P2")) < 0)
         {
-            Debug.Log("RightTrigger 2!");
             rigidbody.velocity += transform.forward * moveDistance;
         }
         if (Mathf.Round(Input.GetAxis("Triggers_P2")) > 0)
         {
-            Debug.Log("RightTrigger 2!");
             rigidbody.velocity += -transform.forward * moveDistance;
         }
 
@@ -159,5 +154,10 @@ public class BasicVehicleControlPlayer2 : MonoBehaviour
             Vector3 rotVector = new Vector3(-rotSpeed, 0.0f, 0.0f);
             transform.Rotate(rotVector * Time.deltaTime);
         }
+    }
+
+    void OnGUI()
+    {
+        GUI.Label(new Rect(Screen.width - 200, 100, 100, 20), "Energy 2: " + Mathf.Round(energyScript.currentEnergy).ToString());
     }
 }

@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof (EnergyScript))]
 public class BasicVehicleControl : MonoBehaviour 
 {
-
     public float speed = 50.0f;
     public float turnSpeed = 50.0f;
     public float rotSpeed = 10.0f;
@@ -19,10 +19,12 @@ public class BasicVehicleControl : MonoBehaviour
     public float rayCastDistance;
 
     private Rigidbody rigidbody;
+    private EnergyScript energyScript;
 
 	// Use this for initialization
 	void Awake () 
     {
+        energyScript = GetComponent<EnergyScript>();
         rigidbody = GetComponent<Rigidbody>();
         maxSpeedBoosted = maxSpeed * boostMultiplier;
         oldMaxSpeed = maxSpeed;
@@ -33,10 +35,11 @@ public class BasicVehicleControl : MonoBehaviour
     {
 
         // Boost
-        if (Input.GetButton("X"))
+        if (Input.GetButton("X") && energyScript.currentEnergy > 0.0f)
         {
             maxSpeed = maxSpeedBoosted;
             rigidbody.AddForce(transform.forward * speed * 2);
+            energyScript.BoostCost();
         }
         else
         {
@@ -62,7 +65,6 @@ public class BasicVehicleControl : MonoBehaviour
 
             if (Input.GetButtonDown("A") || Input.GetButtonDown("Space"))
             {
-                Debug.Log("JUMP!");
                 rigidbody.velocity += transform.up * jumpHeight * Time.deltaTime;
             }
 
@@ -91,12 +93,10 @@ public class BasicVehicleControl : MonoBehaviour
         // Accelerate and Decelerate
         if (Mathf.Round(Input.GetAxis("Triggers")) < 0)
         {
-            Debug.Log("RightTrigger!");
             rigidbody.velocity += transform.forward * moveDistance;
         }
         if (Mathf.Round(Input.GetAxis("Triggers")) > 0)
         {
-            Debug.Log("RightTrigger!");
             rigidbody.velocity += -transform.forward * moveDistance;
         }
 
@@ -128,7 +128,6 @@ public class BasicVehicleControl : MonoBehaviour
         }
     }
 
-
     void Rotation()
     {
         Vector3 _rotVector = new Vector3(0.0f, 0.0f, -turnSpeed) * Time.deltaTime * Input.GetAxis("RightJoystickX");
@@ -159,5 +158,10 @@ public class BasicVehicleControl : MonoBehaviour
             Vector3 rotVector = new Vector3(-rotSpeed, 0.0f, 0.0f);
             transform.Rotate(rotVector * Time.deltaTime);
         }
+    }
+
+    void OnGUI()
+    {
+        GUI.Label(new Rect(200, 200, 100, 20), "Energy: " + Mathf.Round(energyScript.currentEnergy).ToString());
     }
 }
