@@ -33,23 +33,13 @@ public class BasicVehicleControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        // Boost
-        if (Input.GetButton("X") && energyScript.currentEnergy > 0.0f)
-        {
-            maxSpeed = maxSpeedBoosted;
-            rigidbody.AddForce(transform.forward * speed * 2);
-            energyScript.BoostCost();
-        }
-        else
-        {
-            maxSpeed = oldMaxSpeed;
-        }
-
-        
+        // Steering
+        Vector3 _rotVector = new Vector3(0.0f, turnSpeed, 0.0f) * Time.deltaTime * Input.GetAxis("LeftJoystickX");
+        transform.Rotate(_rotVector * Time.deltaTime);
 
         Rotation();
 
+        // quit
         if(Input.GetKey("escape"))
         {
             Application.Quit();
@@ -84,11 +74,17 @@ public class BasicVehicleControl : MonoBehaviour
     {
         float moveDistance = speed * Time.deltaTime;
 
-        if (Input.GetButtonDown("B_all"))
+        // Boost
+        if (Input.GetButton("X") && energyScript.currentEnergy > 0.0f)
         {
-            Debug.Log("lol");
+            maxSpeed = maxSpeedBoosted;
+            rigidbody.AddForce(transform.forward * speed * 2);
+            energyScript.BoostCost();
         }
-
+        else
+        {
+            maxSpeed = oldMaxSpeed;
+        }
 
         // Accelerate and Decelerate
         if (Mathf.Round(Input.GetAxis("Triggers")) < 0)
@@ -100,11 +96,7 @@ public class BasicVehicleControl : MonoBehaviour
             rigidbody.velocity += -transform.forward * moveDistance;
         }
 
-        // Steering
-        Vector3 _rotVector = new Vector3(0.0f, turnSpeed, 0.0f) * Time.deltaTime * Input.GetAxis("LeftJoystickX");
-        transform.Rotate(_rotVector * Time.deltaTime);
-               
-        
+        // Keyboard input       
         if (Input.GetKey("w"))
         {
             //transform.Translate(Vector3.forward * moveDistance);

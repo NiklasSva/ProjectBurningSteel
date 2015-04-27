@@ -5,20 +5,23 @@ public class CheckGravity : MonoBehaviour
 {
     // how many road segment's sphere (or rather box) of influence the player is currently inside.
     private int triggerCount;
-	
+
+    public float gravityMultiplier = 1.0f;
 	
 	// Update is called once per frame
 	void Update () 
     {
         if (triggerCount > 0)
         {
-            if(GetComponent<Rigidbody>())
-                GetComponent<Rigidbody>().useGravity = false;
+         /*   if(GetComponent<Rigidbody>())
+                GetComponent<Rigidbody>().useGravity = false;*/
         }
         else
         {
-            if (GetComponent<Rigidbody>())
-                GetComponent<Rigidbody>().useGravity = true;
+          /*  if (GetComponent<Rigidbody>())
+                GetComponent<Rigidbody>().useGravity = true;*/
+
+            GetComponent<Rigidbody>().velocity += Vector3.down * 9.81f * Time.deltaTime * GetComponent<Rigidbody>().mass * gravityMultiplier;
         }
 	}
 

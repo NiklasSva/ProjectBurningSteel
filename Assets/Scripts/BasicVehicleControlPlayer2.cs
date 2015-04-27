@@ -33,23 +33,13 @@ public class BasicVehicleControlPlayer2 : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        // Boost
-        if (Input.GetButton("X_P2") && energyScript.currentEnergy > 0.0f)
-        {
-            maxSpeed = maxSpeedBoosted;
-            rigidbody.AddForce(transform.forward * speed * 2);
-            energyScript.BoostCost();
-        }
-        else
-        {
-            maxSpeed = oldMaxSpeed;
-        }
-
+        // steering
+        Vector3 _rotVector = new Vector3(0.0f, turnSpeed, 0.0f) * Time.deltaTime * Input.GetAxis("LeftJoystickX_P2");
+        transform.Rotate(_rotVector * Time.deltaTime);
         
-
         Rotation();
-
+        
+        // quit
         if(Input.GetKey("escape"))
         {
             Application.Quit();
@@ -84,6 +74,18 @@ public class BasicVehicleControlPlayer2 : MonoBehaviour
     {
         float moveDistance = speed * Time.deltaTime;
 
+        // Boost
+        if (Input.GetButton("X_P2") && energyScript.currentEnergy > 0.0f)
+        {
+            maxSpeed = maxSpeedBoosted;
+            rigidbody.AddForce(transform.forward * speed * 2);
+            energyScript.BoostCost();
+        }
+        else
+        {
+            maxSpeed = oldMaxSpeed;
+        }
+
         // Accelerate and Decelerate
         if (Mathf.Round(Input.GetAxis("Triggers_P2")) < 0)
         {
@@ -93,13 +95,8 @@ public class BasicVehicleControlPlayer2 : MonoBehaviour
         {
             rigidbody.velocity += -transform.forward * moveDistance;
         }
-
-
-        // steering
-        Vector3 _rotVector = new Vector3(0.0f, turnSpeed, 0.0f) * Time.deltaTime * Input.GetAxis("LeftJoystickX_P2");
-        transform.Rotate(_rotVector * Time.deltaTime);
-               
         
+        // Keyboard input
         if (Input.GetKey("w"))
         {
             //transform.Translate(Vector3.forward * moveDistance);
@@ -158,6 +155,6 @@ public class BasicVehicleControlPlayer2 : MonoBehaviour
 
     void OnGUI()
     {
-        GUI.Label(new Rect(Screen.width - 200, 100, 100, 20), "Energy 2: " + Mathf.Round(energyScript.currentEnergy).ToString());
+        GUI.Label(new Rect(Screen.width - 200, 500, 100, 20), "Energy 2: " + Mathf.Round(energyScript.currentEnergy).ToString());
     }
 }

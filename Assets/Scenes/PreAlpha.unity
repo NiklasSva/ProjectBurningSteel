@@ -424,7 +424,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11408380, guid: a2a6a1f51f1553f44bb9190d32194d29, type: 2}
       propertyPath: speed
-      value: 1000
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 11408380, guid: a2a6a1f51f1553f44bb9190d32194d29, type: 2}
       propertyPath: jumpHeight
@@ -432,7 +432,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11408380, guid: a2a6a1f51f1553f44bb9190d32194d29, type: 2}
       propertyPath: turnSpeed
-      value: 3000
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 6540966, guid: a2a6a1f51f1553f44bb9190d32194d29, type: 2}
       propertyPath: m_Size.y
@@ -445,6 +445,18 @@ Prefab:
     - target: {fileID: 6540966, guid: a2a6a1f51f1553f44bb9190d32194d29, type: 2}
       propertyPath: m_Size.z
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 2037204, guid: a2a6a1f51f1553f44bb9190d32194d29, type: 2}
+      propertyPath: m_NormalizedViewPortRect.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2037204, guid: a2a6a1f51f1553f44bb9190d32194d29, type: 2}
+      propertyPath: m_NormalizedViewPortRect.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2037204, guid: a2a6a1f51f1553f44bb9190d32194d29, type: 2}
+      propertyPath: m_NormalizedViewPortRect.height
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6579108, guid: a2a6a1f51f1553f44bb9190d32194d29, type: 2}
