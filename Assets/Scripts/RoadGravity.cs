@@ -14,12 +14,6 @@ public class RoadGravity : MonoBehaviour
     {
         if (other.tag != "Ignore")
         {
-            // help players rotate with the track - first try
-            if (other.tag == "Player")
-            {
-                //other.transform.rotation = this.transform.rotation;
-            }
-
             enteredObjects.Add(other.GetInstanceID(), other.transform);
 
             other.GetComponent<CheckGravity>().EnteredTrigger();

@@ -60,6 +60,10 @@ public class BasicVehicleControl : MonoBehaviour
 
             VehicleInput();
         }
+        else
+        {
+            GetComponent<EnergyScript>().AttritionDamage();
+        }
 
         Vector3 vel = rigidbody.velocity;
         if (vel.magnitude > maxSpeed)

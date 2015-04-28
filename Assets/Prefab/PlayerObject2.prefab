@@ -118,8 +118,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 174238}
-  m_LocalRotation: {x: 0, y: 1, z: 0, w: -1.62920685e-07}
-  m_LocalPosition: {x: -4200, y: 475, z: 40}
+  m_LocalRotation: {x: 0, y: -.686026037, z: 0, w: .727577031}
+  m_LocalPosition: {x: -15377, y: 1105, z: -19797}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 472302}
@@ -276,7 +276,7 @@ MonoBehaviour:
   raycastLayermask:
     serializedVersion: 2
     m_Bits: 16
-  rayCastDistance: 50
+  rayCastDistance: 100
 --- !u!114 &11427338
 MonoBehaviour:
   m_ObjectHideFlags: 1

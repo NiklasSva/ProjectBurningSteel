@@ -9,6 +9,8 @@ public class EnergyScript : MonoBehaviour
     public float boostCostModifier = 1.0f;
     public float boostRechargeModifier = 1.0f;
 
+    public float attritionModifier = 1.0f;
+
     void Start()
     {
         currentEnergy = maxEnergy;
@@ -22,5 +24,10 @@ public class EnergyScript : MonoBehaviour
     public void Recharge()
     {
         currentEnergy += Time.deltaTime * boostRechargeModifier;
+    }
+
+    public void AttritionDamage()
+    {
+        currentEnergy -= Time.deltaTime * attritionModifier;
     }
 }
