@@ -6,8 +6,6 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/testingLevel.unity
+    path: Assets/Scenes/TestingLoopsAndCurves.unity
   - enabled: 1
     path: Assets/Scenes/FirstPlayableWin.unity
-  - enabled: 1
-    path: Assets/Scenes/PreAlpha.unity

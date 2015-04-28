@@ -106,8 +106,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 174238}
-  m_LocalRotation: {x: -.0537881777, y: .735752285, z: .0527390204, w: .673048317}
-  m_LocalPosition: {x: -26793, y: 613, z: -3489}
+  m_LocalRotation: {x: 0, y: .675590038, z: 0, w: -.737277508}
+  m_LocalPosition: {x: -11641.4004, y: 1105, z: -19818.3008}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 472302}
@@ -224,7 +224,7 @@ Rigidbody:
   m_Mass: 5
   m_Drag: .5
   m_AngularDrag: .0500000007
-  m_UseGravity: 0
+  m_UseGravity: 1
   m_IsKinematic: 0
   m_Interpolate: 0
   m_Constraints: 112
@@ -292,6 +292,7 @@ MonoBehaviour:
   currentEnergy: 0
   boostCostModifier: 5
   boostRechargeModifier: 1
+  attritionModifier: 1
 --- !u!114 &11474148
 MonoBehaviour:
   m_ObjectHideFlags: 1

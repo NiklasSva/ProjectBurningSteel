@@ -15,7 +15,7 @@ public class RestartScript : MonoBehaviour
     {
 	    if(Input.GetKey("r"))
         {
-            Application.LoadLevel("testingLevel");
+            Application.LoadLevel("TestingLoopsAndCurves");
         }
         
         if(Input.GetKey("escape"))

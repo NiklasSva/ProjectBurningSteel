@@ -118,8 +118,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 174238}
-  m_LocalRotation: {x: 0, y: -.686026037, z: 0, w: .727577031}
-  m_LocalPosition: {x: -15377, y: 1105, z: -19797}
+  m_LocalRotation: {x: 0, y: .675590038, z: 0, w: -.737277508}
+  m_LocalPosition: {x: -11650, y: 1105, z: -20016}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 472302}
@@ -292,6 +292,7 @@ MonoBehaviour:
   currentEnergy: 0
   boostCostModifier: 5
   boostRechargeModifier: 1
+  attritionModifier: 1
 --- !u!114 &11474148
 MonoBehaviour:
   m_ObjectHideFlags: 1

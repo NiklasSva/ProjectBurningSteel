@@ -33,12 +33,6 @@ public class BasicVehicleControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Steering
-        Vector3 _rotVector = new Vector3(0.0f, turnSpeed, 0.0f) * Time.deltaTime * Input.GetAxis("LeftJoystickX");
-        transform.Rotate(_rotVector * Time.deltaTime);
-
-        Rotation();
-
         // quit
         if(Input.GetKey("escape"))
         {
@@ -48,6 +42,10 @@ public class BasicVehicleControl : MonoBehaviour
 
     void FixedUpdate()
     {
+        // Steering
+        Vector3 _rotVector = new Vector3(0.0f, turnSpeed, 0.0f) * Time.deltaTime * Input.GetAxis("LeftJoystickX");
+        transform.Rotate(_rotVector * Time.deltaTime);
+
         // On Ground?
         if (Physics.Raycast(rayCastObject.position, rayCastObject.up * -1, rayCastDistance, raycastLayermask))
         {
@@ -62,6 +60,8 @@ public class BasicVehicleControl : MonoBehaviour
         }
         else
         {
+            Rotation();
+
             GetComponent<EnergyScript>().AttritionDamage();
         }
 

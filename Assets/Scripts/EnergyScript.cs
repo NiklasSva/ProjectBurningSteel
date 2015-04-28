@@ -11,6 +11,8 @@ public class EnergyScript : MonoBehaviour
 
     public float attritionModifier = 1.0f;
 
+    // 
+
     void Start()
     {
         currentEnergy = maxEnergy;
