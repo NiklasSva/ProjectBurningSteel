@@ -11,7 +11,7 @@ public class JetBeamSizeHandler : MonoBehaviour {
 	void Start () 
 	{
 
-		m_StartSize = 1;
+		m_StartSize = 50;
 		m_StartLifetime = 0.1f;
 
 	}
@@ -22,7 +22,7 @@ public class JetBeamSizeHandler : MonoBehaviour {
 		if (Input.GetKey ("space")) 
 		{
 
-			m_StartSize = 2;
+			m_StartSize = 100;
 			m_StartLifetime = 0.5f;
 
 
@@ -30,7 +30,7 @@ public class JetBeamSizeHandler : MonoBehaviour {
 		else 
 		{
 
-			m_StartSize = 1;
+			m_StartSize = 50;
 			m_StartLifetime = 0.1f;
 
 		}

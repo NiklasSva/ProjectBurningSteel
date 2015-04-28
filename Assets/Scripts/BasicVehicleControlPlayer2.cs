@@ -51,7 +51,7 @@ public class BasicVehicleControlPlayer2 : MonoBehaviour
         {
             Debug.DrawRay(rayCastObject.position, rayCastObject.up * -1, Color.green);
 
-            if (Input.GetButtonDown("A_P2") || Input.GetButtonDown("Space"))
+            if (Input.GetButtonDown("A_P2"))
             {
                 rigidbody.velocity += transform.up * jumpHeight * Time.deltaTime;
             }
