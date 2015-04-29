@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+[RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof (EnergyScript))]
 public class BasicVehicleControl : MonoBehaviour 
 {
@@ -49,7 +50,7 @@ public class BasicVehicleControl : MonoBehaviour
         // On Ground?
         if (Physics.Raycast(rayCastObject.position, rayCastObject.up * -1, rayCastDistance, raycastLayermask))
         {
-            Debug.DrawRay(rayCastObject.position, rayCastObject.up * -1, Color.green);
+            //Debug.DrawRay(rayCastObject.position, rayCastObject.up * -1, Color.green);
 
             if (Input.GetButtonDown("A"))
             {

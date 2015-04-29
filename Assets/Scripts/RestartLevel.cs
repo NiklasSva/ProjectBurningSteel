@@ -9,5 +9,10 @@ public class RestartLevel : MonoBehaviour
         {
             Application.LoadLevel(Application.loadedLevel);
         }
+
+        if (Input.GetKey("escape"))
+        {
+            Application.Quit();
+        }
 	}
 }
