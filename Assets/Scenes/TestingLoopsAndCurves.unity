@@ -2054,7 +2054,7 @@ Prefab:
       propertyPath: m_RootOrder
       value: 8
       objectReference: {fileID: 0}
-    - target: {fileID: 11408380, guid: a2a6a1f51f1553f44bb9190d32194d29, type: 2}
+    - target: {fileID: 0}
       propertyPath: turnSpeed
       value: 3000
       objectReference: {fileID: 0}
@@ -2064,11 +2064,47 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11474148, guid: a2a6a1f51f1553f44bb9190d32194d29, type: 2}
       propertyPath: gravityMultiplier
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 11420844, guid: a2a6a1f51f1553f44bb9190d32194d29, type: 2}
       propertyPath: boostRechargeModifier
       value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 495250, guid: a2a6a1f51f1553f44bb9190d32194d29, type: 2}
+      propertyPath: m_RootOrder
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 11415876, guid: a2a6a1f51f1553f44bb9190d32194d29, type: 2}
+      propertyPath: turnSpeed
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 11415876, guid: a2a6a1f51f1553f44bb9190d32194d29, type: 2}
+      propertyPath: rotSpeed
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 11415876, guid: a2a6a1f51f1553f44bb9190d32194d29, type: 2}
+      propertyPath: jumpHeight
+      value: 10000
+      objectReference: {fileID: 0}
+    - target: {fileID: 11415876, guid: a2a6a1f51f1553f44bb9190d32194d29, type: 2}
+      propertyPath: speed
+      value: 10000
+      objectReference: {fileID: 0}
+    - target: {fileID: 11415876, guid: a2a6a1f51f1553f44bb9190d32194d29, type: 2}
+      propertyPath: maxSpeed
+      value: 5000
+      objectReference: {fileID: 0}
+    - target: {fileID: 11415876, guid: a2a6a1f51f1553f44bb9190d32194d29, type: 2}
+      propertyPath: rayCastDistance
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 5416278, guid: a2a6a1f51f1553f44bb9190d32194d29, type: 2}
+      propertyPath: m_Drag
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5416278, guid: a2a6a1f51f1553f44bb9190d32194d29, type: 2}
+      propertyPath: m_Mass
+      value: 5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a2a6a1f51f1553f44bb9190d32194d29, type: 2}

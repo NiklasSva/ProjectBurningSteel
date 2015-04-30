@@ -78,11 +78,12 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 446226}
-  - 114: {fileID: 11408380}
   - 54: {fileID: 5416278}
-  - 114: {fileID: 11474148}
   - 65: {fileID: 6540966}
+  - 114: {fileID: 11474148}
   - 114: {fileID: 11420844}
+  - 114: {fileID: 11415876}
+  - 114: {fileID: 11480914}
   m_Layer: 0
   m_Name: PlayerObject
   m_TagString: Player
@@ -286,7 +287,7 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 167084}
   m_Enabled: 0
---- !u!114 &11408380
+--- !u!114 &11415876
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
@@ -294,20 +295,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 174238}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 79641c41cbc016f40854d89f2a3d5594, type: 3}
+  m_Script: {fileID: 11500000, guid: d3d31ae9fb04bd3429d6f9e4296f1317, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3000
   turnSpeed: 3000
-  rotSpeed: 50
-  jumpHeight: 5000
-  maxSpeed: 1000
+  rotSpeed: 1000
+  jumpHeight: 10000
+  maxSpeed: 5000
   boostMultiplier: 2
   rayCastObject: {fileID: 472302}
   raycastLayermask:
     serializedVersion: 2
     m_Bits: 16
-  rayCastDistance: 100
+  rayCastDistance: 50
 --- !u!114 &11420844
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -336,6 +337,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gravityMultiplier: 10
+--- !u!114 &11480914
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 174238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 95a4002dac0c0b64f9c35be6bc09c03a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11495990
 MonoBehaviour:
   m_ObjectHideFlags: 1

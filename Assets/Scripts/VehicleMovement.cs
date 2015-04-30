@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 [RequireComponent(typeof(Rigidbody))]
 [RequireComponent(typeof(EnergyScript))]
@@ -8,14 +7,16 @@ public class VehicleMovement : MonoBehaviour
     private Rigidbody rigidbodyRef;
     private EnergyScript energyScriptRef;
 
+    private bool inAir = false;
+
     // Speed, turn, rotation & jump variables
-    public float speed      = 50.0f;
-    public float turnSpeed  = 50.0f;
-    public float rotSpeed   = 10.0f;
-    public float jumpHeight = 20.0f;
+    public float speed      = 10000.0f;
+    public float turnSpeed  = 100.0f;
+    public float rotSpeed   = 100.0f;
+    public float jumpHeight = 10000.0f;
 
     // Boost variables
-    public float maxSpeed           = 200.0f;
+    public float maxSpeed           = 5000.0f;
     public float boostMultiplier    = 2.0f;
 
     private float maxSpeedBoosted;
@@ -26,13 +27,34 @@ public class VehicleMovement : MonoBehaviour
     public LayerMask raycastLayermask;
     public float rayCastDistance;
 
-    // Input variables
-    private float triggerAxis       = 0.0f;
-    private float leftStickAxisX    = 0.0f;
+    // Input axis
+    private float leftStickAxisX    = 0.0f; // X axis
+    private float leftStickAxisY    = 0.0f; // Y axis
 
+    private float triggerAxis   = 0.0f; // 3rd axis
 
-    private bool buttonA = false;
-    private bool buttonX = false;
+    private float rightStickAxisX   = 0.0f; // 4th axis
+    private float rightStickAxisY   = 0.0f; // 5th axis
+
+    private float horizontal_Dpad   = 0.0f; // 6th axis
+    private float vertical_Dpad     = 0.0f; // 7th axis
+    
+    // Input buttons
+    private bool buttonA = false; // 0
+    private bool buttonB = false; // 1
+    private bool buttonX = false; // 2
+    private bool buttonY = false; // 3
+
+    private bool leftButton     = false; // 4
+    private bool rightButton    = false; // 5
+
+    private bool backButton     = false; // 6
+    private bool startButton    = false; // 7
+
+    private bool leftStickButton    = false; // 8
+    private bool rightStickButton   = false; // 9
+
+    //---------------------------------------------------------------------------------------
 
     void Awake()
     {
@@ -45,8 +67,21 @@ public class VehicleMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        float move = speed * Time.deltaTime;
+
+        // Acceleration & deceleration
+        if (Mathf.Round(triggerAxis) < 0)
+        {
+            rigidbodyRef.velocity += transform.forward * move;
+        }
+        if (Mathf.Round(triggerAxis) > 0)
+        {
+            rigidbodyRef.velocity -= transform.forward * move; // change to be more like breaks
+        }
+
         // Steering
         Vector3 steeringVector = new Vector3(0.0f, turnSpeed, 0.0f) * Time.deltaTime * leftStickAxisX;
+        transform.Rotate(steeringVector);
 
         // 'On track' check
         if (Physics.Raycast(rayCastObject.position, rayCastObject.up * -1, rayCastDistance, raycastLayermask))
@@ -56,7 +91,7 @@ public class VehicleMovement : MonoBehaviour
         else
         {
             // Pitch/Roll
-
+            InAir();
             // Energy attrition
             energyScriptRef.AttritionDamage();
         }
@@ -74,8 +109,6 @@ public class VehicleMovement : MonoBehaviour
 
     void OnTrackMovement()
     {
-        float move = speed * Time.deltaTime;
-
         // Jump
         if (buttonA)
         {
@@ -83,46 +116,118 @@ public class VehicleMovement : MonoBehaviour
         }
 
         // Boost
-        if (buttonX && energyScriptRef.currentEnergy > 0.0f)
+        if (buttonX)
         {
-            maxSpeed = maxSpeedBoosted;
-            rigidbodyRef.AddForce(transform.forward * speed * Time.deltaTime * boostMultiplier);
-            energyScriptRef.BoostCost();
+            if (energyScriptRef.currentEnergy > 0.0f)
+            {
+                Debug.Log("Boost!");
+
+                maxSpeed = maxSpeedBoosted;
+                energyScriptRef.BoostCost();
+            }
         }
         else
         {
             maxSpeed = maxSpeedDefault;
-        }
-
-        // Acceleration & deceleration
-        if (Mathf.Round(triggerAxis) < 0)
-        {
-            rigidbodyRef.velocity += transform.forward * move;
-        }
-        if (Mathf.Round(triggerAxis) > 0)
-        {
-            rigidbodyRef.velocity -= transform.forward * move;
-        }
+        }        
     }
 
-    // Set axis values
-    public void TriggerAxis(float axisValue)
+    void InAir()
     {
-        triggerAxis = axisValue;
+        inAir = true;
+
+        // Roll
+        Vector3 rotationVector = new Vector3(0.0f, 0.0f, -rotSpeed) * Time.deltaTime * rightStickAxisX;
+        transform.Rotate(rotationVector);
+
+        // Pitch
+        rotationVector = new Vector3(-rotSpeed, 0.0f, 0.0f) * Time.deltaTime * rightStickAxisY;
+        transform.Rotate(rotationVector);
     }
 
-    public void LeftStickAxisX(float axisValue)
+    // Input values:
+
+    // Left stick
+    public void LeftStickAxisX(float value)
     {
-        leftStickAxisX = axisValue;
+        leftStickAxisX = value;
+    }
+    public void LeftStickAxisY(float value)
+    {
+        leftStickAxisY = value;
     }
 
-    // Set buttons
+    // Triggers
+    public void TriggerAxis(float value)
+    {
+        triggerAxis = value;
+    }
+
+    // Right stick
+    public void RightStickAxisX(float value)
+    {
+        rightStickAxisX = value;
+    }
+    public void RightStickAxisY(float value)
+    {
+        rightStickAxisY = value;
+    }
+
+    // DPAD
+    public void HorizontalDPAD(float value)
+    {
+        horizontal_Dpad = value;
+    }
+    public void VerticalDPAD(float value)
+    {
+        vertical_Dpad = value;
+    }
+
+    // Face buttons
     public void ButtonA(bool isPressed)
     {
         buttonA = isPressed;
     }
+    public void ButtonB(bool isPressed)
+    {
+        buttonB = isPressed;
+    }
     public void ButtonX(bool isPressed)
     {
         buttonX = isPressed;
+    }
+    public void ButtonY(bool isPressed)
+    {
+        buttonY = isPressed;
+    }
+
+    // LB & RB
+    public void LeftButton(bool isPressed)
+    {
+        leftButton = isPressed;
+    }
+    public void RightButton(bool isPressed)
+    {
+        rightButton = isPressed;
+    }
+
+    // Back & Start
+    public void StartButton(bool isPressed)
+    {
+        startButton = isPressed;
+    }
+    public void BackButton(bool isPressed)
+    {
+        backButton = isPressed;
+    }
+
+    // Left & Right stick buttons
+    public void LeftStickButton(bool isPressed)
+    {
+        leftStickButton = isPressed;
+    }
+    public void RightStickButton(bool isPressed)
+    {
+        rightStickButton = isPressed;
     }
 }
