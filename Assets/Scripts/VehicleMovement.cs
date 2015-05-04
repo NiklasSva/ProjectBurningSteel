@@ -7,13 +7,15 @@ public class VehicleMovement : MonoBehaviour
     private Rigidbody rigidbodyRef;
     private EnergyScript energyScriptRef;
 
-    private bool inAir = false;
-
     // Speed, turn, rotation & jump variables
     public float speed      = 10000.0f;
     public float turnSpeed  = 100.0f;
     public float rotSpeed   = 100.0f;
     public float jumpHeight = 10000.0f;
+    public float onTrackModifier = 1.0f;
+    public float inAirModifier = 0.01f;
+
+    private float trackOrAirMovement = 1.0f;
 
     // Boost variables
     public float maxSpeed           = 5000.0f;
@@ -72,11 +74,11 @@ public class VehicleMovement : MonoBehaviour
         // Acceleration & deceleration
         if (Mathf.Round(triggerAxis) < 0)
         {
-            rigidbodyRef.velocity += transform.forward * move;
+            rigidbodyRef.velocity += transform.forward * move * trackOrAirMovement;
         }
         if (Mathf.Round(triggerAxis) > 0)
         {
-            rigidbodyRef.velocity -= transform.forward * move; // change to be more like breaks
+            rigidbodyRef.velocity -= transform.forward * move * trackOrAirMovement; // change to be more like breaks
         }
 
         // Steering
@@ -109,10 +111,12 @@ public class VehicleMovement : MonoBehaviour
 
     void OnTrackMovement()
     {
+        trackOrAirMovement = onTrackModifier;
+
         // Jump
         if (buttonA)
         {
-            rigidbodyRef.velocity = transform.up * jumpHeight * Time.deltaTime;
+            rigidbodyRef.AddForce(transform.up * jumpHeight);
         }
 
         // Boost
@@ -134,7 +138,7 @@ public class VehicleMovement : MonoBehaviour
 
     void InAir()
     {
-        inAir = true;
+        trackOrAirMovement = inAirModifier;
 
         // Roll
         Vector3 rotationVector = new Vector3(0.0f, 0.0f, -rotSpeed) * Time.deltaTime * rightStickAxisX;

@@ -60,11 +60,11 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 446226}
-  - 114: {fileID: 11408380}
   - 54: {fileID: 5416278}
-  - 114: {fileID: 11474148}
   - 65: {fileID: 6540966}
+  - 114: {fileID: 11474148}
   - 114: {fileID: 11427338}
+  - 114: {fileID: 11447532}
   m_Layer: 0
   m_Name: PlayerObject2
   m_TagString: Player
@@ -255,28 +255,6 @@ Behaviour:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 171394}
   m_Enabled: 0
---- !u!114 &11408380
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 174238}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6b215a13be11ada45a1942fac2847421, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 3000
-  turnSpeed: 3000
-  rotSpeed: 50
-  jumpHeight: 5000
-  maxSpeed: 1000
-  boostMultiplier: 2
-  rayCastObject: {fileID: 472302}
-  raycastLayermask:
-    serializedVersion: 2
-    m_Bits: 16
-  rayCastDistance: 100
 --- !u!114 &11427338
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -291,8 +269,30 @@ MonoBehaviour:
   maxEnergy: 100
   currentEnergy: 0
   boostCostModifier: 5
-  boostRechargeModifier: 1
+  boostRechargeModifier: 20
   attritionModifier: 1
+--- !u!114 &11447532
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 174238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d3d31ae9fb04bd3429d6f9e4296f1317, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 10000
+  turnSpeed: 100
+  rotSpeed: 100
+  jumpHeight: 100000
+  maxSpeed: 5000
+  boostMultiplier: 2
+  rayCastObject: {fileID: 472302}
+  raycastLayermask:
+    serializedVersion: 2
+    m_Bits: 16
+  rayCastDistance: 100
 --- !u!114 &11474148
 MonoBehaviour:
   m_ObjectHideFlags: 1
