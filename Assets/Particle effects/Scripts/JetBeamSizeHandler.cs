@@ -1,15 +1,18 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class JetBeamSizeHandler : MonoBehaviour {
-
+public class JetBeamSizeHandler : MonoBehaviour 
+{
 	public ParticleSystem m_ParticleSystem;
 	public float m_StartSize;
 	public float m_StartLifetime;
 
+    private VehicleMovement moveScriptRef;
+
 	// Use this for initialization
 	void Start () 
 	{
+        moveScriptRef = GetComponent<VehicleMovement>();
 
 		m_StartSize = 50;
 		m_StartLifetime = 0.1f;
@@ -21,18 +24,19 @@ public class JetBeamSizeHandler : MonoBehaviour {
 	{
 		if (Input.GetKey ("space")) 
 		{
-
 			m_StartSize = 100;
 			m_StartLifetime = 0.5f;
 
-
-		} 
+		}
+        else if(moveScriptRef.maxSpeed == moveScriptRef.maxSpeedBoosted)
+        {
+            m_StartSize = 100;
+			m_StartLifetime = 0.5f;
+        }
 		else 
 		{
-
 			m_StartSize = 50;
 			m_StartLifetime = 0.1f;
-
 		}
 		m_ParticleSystem.startSize = m_StartSize;
 		m_ParticleSystem.startLifetime = m_StartLifetime;

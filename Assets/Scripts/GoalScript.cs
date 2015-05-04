@@ -1,17 +1,20 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System.Collections.Generic;
 
 public class GoalScript : MonoBehaviour 
 {
+    public int winScore = 3;
 
     void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")
         {
-            Debug.Log("Win!");
+            other.GetComponent<PlayerScore>().laps++;
 
-            Application.LoadLevel("FirstPlayableWin");
+            if (other.GetComponent<PlayerScore>().laps >= winScore)
+            {
+                Application.LoadLevel("FirstPlayableWin");
+            }
         }
     }
-
 }

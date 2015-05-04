@@ -301,7 +301,7 @@ MonoBehaviour:
   speed: 3000
   turnSpeed: 3000
   rotSpeed: 1000
-  jumpHeight: 10000
+  jumpHeight: 100000
   maxSpeed: 5000
   boostMultiplier: 2
   rayCastObject: {fileID: 472302}

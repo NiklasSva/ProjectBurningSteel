@@ -21,7 +21,7 @@ public class VehicleMovement : MonoBehaviour
     public float maxSpeed           = 5000.0f;
     public float boostMultiplier    = 2.0f;
 
-    private float maxSpeedBoosted;
+    public float maxSpeedBoosted;
     private float maxSpeedDefault;
 
     // Raycast
@@ -71,6 +71,22 @@ public class VehicleMovement : MonoBehaviour
     {
         float move = speed * Time.deltaTime;
 
+        // Boost
+        if (buttonX)
+        {
+            if (energyScriptRef.currentEnergy > 0.0f)
+            {
+                Debug.Log("Boost!");
+
+                maxSpeed = maxSpeedBoosted;
+                energyScriptRef.BoostCost();
+            }
+        }
+        else
+        {
+            maxSpeed = maxSpeedDefault;
+        } 
+
         // Acceleration & deceleration
         if (Mathf.Round(triggerAxis) < 0)
         {
@@ -117,23 +133,7 @@ public class VehicleMovement : MonoBehaviour
         if (buttonA)
         {
             rigidbodyRef.AddForce(transform.up * jumpHeight);
-        }
-
-        // Boost
-        if (buttonX)
-        {
-            if (energyScriptRef.currentEnergy > 0.0f)
-            {
-                Debug.Log("Boost!");
-
-                maxSpeed = maxSpeedBoosted;
-                energyScriptRef.BoostCost();
-            }
-        }
-        else
-        {
-            maxSpeed = maxSpeedDefault;
-        }        
+        }       
     }
 
     void InAir()
@@ -144,9 +144,11 @@ public class VehicleMovement : MonoBehaviour
         Vector3 rotationVector = new Vector3(0.0f, 0.0f, -rotSpeed) * Time.deltaTime * rightStickAxisX;
         transform.Rotate(rotationVector);
 
+        /*
         // Pitch
         rotationVector = new Vector3(-rotSpeed, 0.0f, 0.0f) * Time.deltaTime * rightStickAxisY;
         transform.Rotate(rotationVector);
+         */
     }
 
     // Input values:
