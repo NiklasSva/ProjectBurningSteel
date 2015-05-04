@@ -76,8 +76,6 @@ public class VehicleMovement : MonoBehaviour
         {
             if (energyScriptRef.currentEnergy > 0.0f)
             {
-                Debug.Log("Boost!");
-
                 maxSpeed = maxSpeedBoosted;
                 energyScriptRef.BoostCost();
             }

@@ -4,7 +4,7 @@ using System.Collections.Generic;
 public class CheckGravity : MonoBehaviour 
 {
     // how many road segment's sphere (or rather box) of influence the player is currently inside.
-    private int triggerCount;
+    public int triggerCount = 0;
 
     public float gravityMultiplier = 1.0f;
 	
@@ -25,14 +25,14 @@ public class CheckGravity : MonoBehaviour
         }
 	}
 
-    public void EnteredTrigger()
+    public void Plus()
     {
         triggerCount++;
     }
 
-    public void ExitedTrigger()
+    public void Minus()
     {
-        if (triggerCount >= 0)
+        if (triggerCount > 0)
         {
             triggerCount--;
         }        

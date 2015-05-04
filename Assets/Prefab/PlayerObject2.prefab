@@ -10,7 +10,6 @@ GameObject:
   - 4: {fileID: 457038}
   - 198: {fileID: 19828250}
   - 199: {fileID: 19947424}
-  - 114: {fileID: 11454746}
   m_Layer: 0
   m_Name: JetBeam
   m_TagString: Untagged
@@ -84,6 +83,7 @@ GameObject:
   - 114: {fileID: 11427338}
   - 114: {fileID: 11447532}
   - 114: {fileID: 11459514}
+  - 114: {fileID: 11453590}
   m_Layer: 0
   m_Name: PlayerObject2
   m_TagString: Player
@@ -165,8 +165,8 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 138270}
-  m_LocalRotation: {x: 1, y: -1.62920685e-07, z: -1.78813934e-07, w: 3.55271368e-14}
-  m_LocalPosition: {x: 197.696777, y: 44, z: -49.3361511}
+  m_LocalRotation: {x: 1, y: -1.62920685e-07, z: -1.62920685e-07, w: 2.65431496e-14}
+  m_LocalPosition: {x: 0, y: 44, z: -58}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 446226}
@@ -328,12 +328,12 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 16
   rayCastDistance: 100
---- !u!114 &11454746
+--- !u!114 &11453590
 MonoBehaviour:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 138270}
+  m_GameObject: {fileID: 174238}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d1067e2447d40df45843fe4fda77b768, type: 3}
@@ -364,6 +364,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba6b110fab4d9a54d88958f689504bdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  triggerCount: 0
   gravityMultiplier: 10
 --- !u!124 &12461210
 Behaviour:

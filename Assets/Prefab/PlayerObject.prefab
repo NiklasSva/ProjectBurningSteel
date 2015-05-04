@@ -10,10 +10,9 @@ GameObject:
   - 4: {fileID: 495250}
   - 198: {fileID: 19867268}
   - 199: {fileID: 19921912}
-  - 114: {fileID: 11495990}
   m_Layer: 0
   m_Name: JetBeam
-  m_TagString: Untagged
+  m_TagString: Ignore
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -84,6 +83,8 @@ GameObject:
   - 114: {fileID: 11420844}
   - 114: {fileID: 11415876}
   - 114: {fileID: 11480914}
+  - 114: {fileID: 11449940}
+  - 114: {fileID: 11463392}
   m_Layer: 0
   m_Name: PlayerObject
   m_TagString: Player
@@ -299,16 +300,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 3000
-  turnSpeed: 3000
-  rotSpeed: 1000
-  jumpHeight: 100000
-  maxSpeed: 5000
+  turnSpeed: 100
+  rotSpeed: 100
+  jumpHeight: 30000
+  onTrackModifier: 1
+  inAirModifier: .00100000005
+  maxSpeed: 4500
   boostMultiplier: 2
+  maxSpeedBoosted: 0
   rayCastObject: {fileID: 472302}
   raycastLayermask:
     serializedVersion: 2
     m_Bits: 16
-  rayCastDistance: 50
+  rayCastDistance: 100
 --- !u!114 &11420844
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -325,6 +329,32 @@ MonoBehaviour:
   boostCostModifier: 5
   boostRechargeModifier: 20
   attritionModifier: 1
+--- !u!114 &11449940
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 174238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d1067e2447d40df45843fe4fda77b768, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ParticleSystem: {fileID: 19867268}
+  m_StartSize: .100000001
+  m_StartLifetime: .100000001
+--- !u!114 &11463392
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 174238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1a6d889aa4010144811ec57c56373d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  laps: 0
 --- !u!114 &11474148
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -336,7 +366,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ba6b110fab4d9a54d88958f689504bdd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gravityMultiplier: 10
+  triggerCount: 0
+  gravityMultiplier: 5
 --- !u!114 &11480914
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -348,20 +379,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 95a4002dac0c0b64f9c35be6bc09c03a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &11495990
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 140220}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d1067e2447d40df45843fe4fda77b768, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_ParticleSystem: {fileID: 19867268}
-  m_StartSize: .100000001
-  m_StartLifetime: .100000001
 --- !u!124 &12486014
 Behaviour:
   m_ObjectHideFlags: 1

@@ -15,17 +15,15 @@ public class RoadGravity : MonoBehaviour
         if (other.tag != "Ignore")
         {
             enteredObjects.Add(other.GetInstanceID(), other.transform);
-
-            other.GetComponent<CheckGravity>().EnteredTrigger();
+            other.GetComponent<CheckGravity>().Plus();
         }
     }
     void OnTriggerExit(Collider other)
     {
         if (other.tag != "Ignore")
         {
-            enteredObjects.Remove(other.GetInstanceID());
-
-            other.GetComponent<CheckGravity>().ExitedTrigger();
+            other.GetComponent<CheckGravity>().Minus();
+            enteredObjects.Remove(other.GetInstanceID());            
         }
     }
 

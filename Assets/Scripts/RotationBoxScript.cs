@@ -32,8 +32,6 @@ public class RotationBoxScript : MonoBehaviour
         if (other.tag == "Player")
         {
             enteredObjects.Remove(other.GetInstanceID());
-
-            other.GetComponent<CheckGravity>().ExitedTrigger();
         }
     }
 }
