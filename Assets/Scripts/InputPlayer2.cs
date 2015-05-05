@@ -21,7 +21,10 @@ public class InputPlayer2 : MonoBehaviour
         vehicleMovementRef.LeftStickAxisX(Input.GetAxis("LeftJoystickX_P2"));  
   
         vehicleMovementRef.ButtonA(Input.GetButton("A_P2"));
-        vehicleMovementRef.ButtonX(Input.GetButton("X_P2"));    
+        vehicleMovementRef.ButtonX(Input.GetButton("X_P2"));
+
+        vehicleMovementRef.LeftButton(Input.GetButton("LB_P2"));
+        vehicleMovementRef.RightButton(Input.GetButton("RB_P2"));
     }
 
         // Move this to another script?

@@ -3,8 +3,6 @@ using System.Collections;
 
 public class KillFloorScript : MonoBehaviour 
 {
-    public Transform startPosition;
-
     void OnTriggerEnter(Collider other)
     {
         if(other.tag == "Player")
@@ -16,7 +14,7 @@ public class KillFloorScript : MonoBehaviour
             other.GetComponent<Rigidbody>().velocity = Vector3.zero;
              */
 
-            other.GetComponent<PlayerRespawnScript>().Respawn();
+            other.GetComponent<Transform>().GetComponent<PlayerRespawnScript>().Respawn();
         }
     }
 }

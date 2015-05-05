@@ -84,6 +84,8 @@ GameObject:
   - 114: {fileID: 11447532}
   - 114: {fileID: 11459514}
   - 114: {fileID: 11453590}
+  - 114: {fileID: 11474932}
+  - 114: {fileID: 11428502}
   m_Layer: 0
   m_Name: PlayerObject2
   m_TagString: Player
@@ -302,7 +304,18 @@ MonoBehaviour:
   currentEnergy: 0
   boostCostModifier: 5
   boostRechargeModifier: 20
-  attritionModifier: 1
+  attritionModifier: 10
+--- !u!114 &11428502
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 174238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dcfdbb579a312744a2fa7fcbd22af57, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &11447532
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -314,14 +327,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3d31ae9fb04bd3429d6f9e4296f1317, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 10000
+  speed: 3000
   turnSpeed: 100
   rotSpeed: 100
   jumpHeight: 30000
+  tackleModifier: 100
   onTrackModifier: 1
   inAirModifier: .00100000005
-  maxSpeed: 5000
+  maxSpeed: 4500
   boostMultiplier: 2
+  boostThreshold: .100000001
   maxSpeedBoosted: 0
   rayCastObject: {fileID: 472302}
   raycastLayermask:
@@ -366,6 +381,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   triggerCount: 0
   gravityMultiplier: 10
+--- !u!114 &11474932
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 174238}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e1a6d889aa4010144811ec57c56373d7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  laps: 0
 --- !u!124 &12461210
 Behaviour:
   m_ObjectHideFlags: 1

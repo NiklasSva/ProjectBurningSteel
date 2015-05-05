@@ -2,24 +2,27 @@
 
 public class PlayerRespawnScript : MonoBehaviour 
 {
-    private Transform respawnPoint;
+    private Vector3 respawnPos;
+    private Quaternion respawnRot;
 
     void Start()
     {
-        respawnPoint = GetComponent<Transform>();
+        respawnPos = GetComponent<Transform>().position;
+        respawnRot = GetComponent<Transform>().rotation;
     }
 
     public void Checkpoint(Transform newRespawn)
     {
-        respawnPoint = newRespawn;
+        respawnPos = newRespawn.position;
+        respawnRot = newRespawn.rotation;
     }
 
     public void Respawn()
     {
-        Debug.Log("respawn");
+        GetComponent<EnergyScript>().currentEnergy = GetComponent<EnergyScript>().maxEnergy;
 
-        GetComponent<Transform>().position = respawnPoint.transform.position;
-        GetComponent<Transform>().rotation = respawnPoint.transform.rotation;
+        GetComponent<Transform>().position = respawnPos;
+        GetComponent<Transform>().rotation = respawnRot;
         GetComponent<Transform>().Rotate(Vector3.zero);
         GetComponent<Rigidbody>().velocity = Vector3.zero;
     }

@@ -39,10 +39,10 @@ public class RoadGravity : MonoBehaviour
             foreach (KeyValuePair<int, Transform> keyValuePair in enteredObjects)
             {
                 // Calculate the acceleration / force
-                Vector3 accel = -this.transform.up * gravitationalAcceleration * Time.deltaTime * gravityMultiplier;
+                Vector3 accel = -this.transform.up * gravitationalAcceleration * gravityMultiplier;
 
                 // Apply the acceleration to the Transform objects rigidbody velocity
-                keyValuePair.Value.GetComponent<Rigidbody>().velocity += accel * keyValuePair.Value.GetComponent<Rigidbody>().mass;
+                keyValuePair.Value.GetComponent<VehicleMovement>().Gravity(accel * keyValuePair.Value.GetComponent<Rigidbody>().mass);
             }
         }
     }

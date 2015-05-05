@@ -7,19 +7,26 @@ public class VehicleMovement : MonoBehaviour
     private Rigidbody rigidbodyRef;
     private EnergyScript energyScriptRef;
 
-    // Speed, turn, rotation & jump variables
-    public float speed      = 10000.0f;
-    public float turnSpeed  = 100.0f;
-    public float rotSpeed   = 100.0f;
-    public float jumpHeight = 10000.0f;
-    public float onTrackModifier = 1.0f;
-    public float inAirModifier = 0.01f;
+    // Gravity
 
-    private float trackOrAirMovement = 1.0f;
+    private Vector3 gravityAcceleration;
+
+    // Speed, turn, rotation & jump variables
+    public float speed          = 10000.0f;
+    public float turnSpeed      = 100.0f;
+    public float rotSpeed       = 100.0f;
+    public float jumpHeight     = 10000.0f;
+    public float tackleModifier = 1000.0f;
+
+    // In air or on track variables
+    public float onTrackModifier        = 1.0f;
+    public float inAirModifier          = 0.01f;
+    private float trackOrAirMovement    = 1.0f;
 
     // Boost variables
     public float maxSpeed           = 5000.0f;
     public float boostMultiplier    = 2.0f;
+    public float boostThreshold     = 0.1f;
 
     public float maxSpeedBoosted;
     private float maxSpeedDefault;
@@ -63,6 +70,7 @@ public class VehicleMovement : MonoBehaviour
         rigidbodyRef    = GetComponent<Rigidbody>();
         energyScriptRef = GetComponent<EnergyScript>();
 
+        // Boost variables
         maxSpeedBoosted = maxSpeed * boostMultiplier;
         maxSpeedDefault = maxSpeed;
     }
@@ -74,7 +82,7 @@ public class VehicleMovement : MonoBehaviour
         // Boost
         if (buttonX)
         {
-            if (energyScriptRef.currentEnergy > 0.0f)
+            if (energyScriptRef.currentEnergy >= (energyScriptRef.maxEnergy * boostThreshold)) // If under a certain threshold of energy reserves, boost is locked
             {
                 maxSpeed = maxSpeedBoosted;
                 energyScriptRef.BoostCost();
@@ -83,22 +91,23 @@ public class VehicleMovement : MonoBehaviour
         else
         {
             maxSpeed = maxSpeedDefault;
-        } 
+        }
+        
+        // Steering
+        Vector3 steeringVector = new Vector3(0.0f, turnSpeed, 0.0f) * Time.deltaTime * leftStickAxisX;
+        transform.Rotate(steeringVector);
+        //rigidbodyRef.velocity = transform.forward * rigidbodyRef.velocity.magnitude; // <- gives better respons to the steering but impedes jumping, rotation and gravity as they are all put into the same magnitud and directed forward
 
         // Acceleration & deceleration
         if (Mathf.Round(triggerAxis) < 0)
-        {
+        {           
             rigidbodyRef.velocity += transform.forward * move * trackOrAirMovement;
         }
         if (Mathf.Round(triggerAxis) > 0)
         {
             rigidbodyRef.velocity -= transform.forward * move * trackOrAirMovement; // change to be more like breaks
         }
-
-        // Steering
-        Vector3 steeringVector = new Vector3(0.0f, turnSpeed, 0.0f) * Time.deltaTime * leftStickAxisX;
-        transform.Rotate(steeringVector);
-
+        
         // 'On track' check
         if (Physics.Raycast(rayCastObject.position, rayCastObject.up * -1, rayCastDistance, raycastLayermask))
         {
@@ -106,11 +115,14 @@ public class VehicleMovement : MonoBehaviour
         }
         else
         {
-            // Pitch/Roll
+            // Roll
             InAir();
             // Energy attrition
             energyScriptRef.AttritionDamage();
         }
+        
+        // Gravity
+        rigidbodyRef.velocity += gravityAcceleration * Time.deltaTime;
 
         // Restrict velocity
         Vector3 vel = rigidbodyRef.velocity;
@@ -120,7 +132,6 @@ public class VehicleMovement : MonoBehaviour
             vel *= maxSpeed;
             rigidbodyRef.velocity = vel;
         }
-
     }
 
     void OnTrackMovement()
@@ -131,7 +142,17 @@ public class VehicleMovement : MonoBehaviour
         if (buttonA)
         {
             rigidbodyRef.AddForce(transform.up * jumpHeight);
-        }       
+        }
+
+        // Tackle
+        if (leftButton)
+        {
+            rigidbodyRef.velocity -= transform.right * tackleModifier;
+        }
+        if (rightButton)
+        {
+            rigidbodyRef.velocity += transform.right * tackleModifier;
+        }
     }
 
     void InAir()
@@ -141,12 +162,15 @@ public class VehicleMovement : MonoBehaviour
         // Roll
         Vector3 rotationVector = new Vector3(0.0f, 0.0f, -rotSpeed) * Time.deltaTime * rightStickAxisX;
         transform.Rotate(rotationVector);
-
-        /*
+        
         // Pitch
-        rotationVector = new Vector3(-rotSpeed, 0.0f, 0.0f) * Time.deltaTime * rightStickAxisY;
-        transform.Rotate(rotationVector);
-         */
+        //rotationVector = new Vector3(-rotSpeed, 0.0f, 0.0f) * Time.deltaTime * rightStickAxisY;
+        //transform.Rotate(rotationVector);
+    }
+
+    public void Gravity(Vector3 directionalAcceleration)
+    {
+        gravityAcceleration = directionalAcceleration;
     }
 
     // Input values:

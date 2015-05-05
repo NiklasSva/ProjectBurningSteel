@@ -21,13 +21,16 @@ public class InputPlayer1 : MonoBehaviour
         vehicleMovementRef.LeftStickAxisX(Input.GetAxis("LeftJoystickX"));  
   
         vehicleMovementRef.ButtonA(Input.GetButton("A"));
-        vehicleMovementRef.ButtonX(Input.GetButton("X"));    
+        vehicleMovementRef.ButtonX(Input.GetButton("X"));
+
+        vehicleMovementRef.LeftButton(Input.GetButton("LB"));
+        vehicleMovementRef.RightButton(Input.GetButton("RB"));
     }
 
         // Move this to another script?
     void OnGUI()
     {
-        GUI.Label(new Rect(200, 200, 100, 20), "Energy: " + Mathf.Round(energyScriptRef.currentEnergy).ToString());
+        GUI.Label(new Rect(100, 300, 100, 20), "Energy: " + Mathf.Round(energyScriptRef.currentEnergy).ToString());
                                                    // ^ add player number here!
     }
 }
