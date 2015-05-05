@@ -7,8 +7,12 @@ public class VehicleMovement : MonoBehaviour
     private Rigidbody rigidbodyRef;
     private EnergyScript energyScriptRef;
 
-    // Gravity
+    // Trying to fix movement
+    private Vector3 acceleration        = new Vector3(0.0f, 0.0f, 0.0f);
+    private Vector3 jumpingAndTackling  = new Vector3(0.0f, 0.0f, 0.0f);
+    private Vector3 gravityEffect       = new Vector3(0.0f, 0.0f, 0.0f);
 
+    // Gravity
     private Vector3 gravityAcceleration;
 
     // Speed, turn, rotation & jump variables
@@ -77,6 +81,27 @@ public class VehicleMovement : MonoBehaviour
 
     void FixedUpdate()
     {
+        OldMovement();
+        //NewMovement();
+    }
+
+    void NewMovement()
+    {
+        // Steering
+        Vector3 steeringVector = new Vector3(0.0f, turnSpeed, 0.0f) * Time.deltaTime * leftStickAxisX;
+        transform.Rotate(steeringVector);
+
+        // Correction of direction of movement
+        Vector3 correction = transform.forward * (rigidbodyRef.velocity.magnitude / 2);
+        rigidbodyRef.velocity = rigidbodyRef.velocity / 2;
+        rigidbodyRef.velocity += correction;
+
+        // Reset vectors
+        acceleration        = Vector3.zero;
+        jumpingAndTackling  = Vector3.zero;
+        gravityEffect       = Vector3.zero;
+
+        // speed for this frame
         float move = speed * Time.deltaTime;
 
         // Boost
@@ -92,85 +117,59 @@ public class VehicleMovement : MonoBehaviour
         {
             maxSpeed = maxSpeedDefault;
         }
-        
-        // Steering
-        Vector3 steeringVector = new Vector3(0.0f, turnSpeed, 0.0f) * Time.deltaTime * leftStickAxisX;
-        transform.Rotate(steeringVector);
-        //rigidbodyRef.velocity = transform.forward * rigidbodyRef.velocity.magnitude; // <- gives better respons to the steering but impedes jumping, rotation and gravity as they are all put into the same magnitud and directed forward
 
-        // Acceleration & deceleration
+        // Acceleration
         if (Mathf.Round(triggerAxis) < 0)
-        {           
-            rigidbodyRef.velocity += transform.forward * move * trackOrAirMovement;
+        {
+            acceleration = transform.forward * move * trackOrAirMovement;
         }
         if (Mathf.Round(triggerAxis) > 0)
         {
-            rigidbodyRef.velocity -= transform.forward * move * trackOrAirMovement; // change to be more like breaks
+            // break
         }
-        
+
+        // Restrict acceleration
+        if (acceleration.magnitude > maxSpeed)
+        {
+            acceleration.Normalize();
+            acceleration *= maxSpeed;
+        }
+
         // 'On track' check
         if (Physics.Raycast(rayCastObject.position, rayCastObject.up * -1, rayCastDistance, raycastLayermask))
         {
-            OnTrackMovement();
+            trackOrAirMovement = onTrackModifier;
+
+            // Jump
+            if (buttonA)
+            {
+                jumpingAndTackling += transform.up * jumpHeight;
+            }
+
+            // Tackle
+            if (leftButton)
+            {
+                jumpingAndTackling -= transform.right * tackleModifier;
+            }
+            if (rightButton)
+            {
+                jumpingAndTackling += transform.right * tackleModifier;
+            }
         }
         else
         {
+            trackOrAirMovement = inAirModifier;
+
             // Roll
-            InAir();
-            // Energy attrition
-            energyScriptRef.AttritionDamage();
+            Vector3 rotationVector = new Vector3(0.0f, 0.0f, -rotSpeed) * Time.deltaTime * rightStickAxisX;
+            transform.Rotate(rotationVector);
         }
-        
+
         // Gravity
-        rigidbodyRef.velocity += gravityAcceleration * Time.deltaTime;
+        gravityEffect = gravityAcceleration * Time.deltaTime;
 
-        // Restrict velocity
-        Vector3 vel = rigidbodyRef.velocity;
-        if (vel.magnitude > maxSpeed)
-        {
-            vel.Normalize();
-            vel *= maxSpeed;
-            rigidbodyRef.velocity = vel;
-        }
-    }
-
-    void OnTrackMovement()
-    {
-        trackOrAirMovement = onTrackModifier;
-
-        // Jump
-        if (buttonA)
-        {
-            rigidbodyRef.AddForce(transform.up * jumpHeight);
-        }
-
-        // Tackle
-        if (leftButton)
-        {
-            rigidbodyRef.velocity -= transform.right * tackleModifier;
-        }
-        if (rightButton)
-        {
-            rigidbodyRef.velocity += transform.right * tackleModifier;
-        }
-    }
-
-    void InAir()
-    {
-        trackOrAirMovement = inAirModifier;
-
-        // Roll
-        Vector3 rotationVector = new Vector3(0.0f, 0.0f, -rotSpeed) * Time.deltaTime * rightStickAxisX;
-        transform.Rotate(rotationVector);
-        
-        // Pitch
-        //rotationVector = new Vector3(-rotSpeed, 0.0f, 0.0f) * Time.deltaTime * rightStickAxisY;
-        //transform.Rotate(rotationVector);
-    }
-
-    public void Gravity(Vector3 directionalAcceleration)
-    {
-        gravityAcceleration = directionalAcceleration;
+        // Add everything to velocity
+        rigidbodyRef.velocity += acceleration + jumpingAndTackling + gravityEffect;        
     }
 
     // Input values:
@@ -257,5 +256,105 @@ public class VehicleMovement : MonoBehaviour
     public void RightStickButton(bool isPressed)
     {
         rightStickButton = isPressed;
+    }
+
+    // Old Code
+
+    void OldMovement()
+    {
+        float move = speed * Time.deltaTime;
+
+        // Boost
+        if (buttonX)
+        {
+            if (energyScriptRef.currentEnergy >= (energyScriptRef.maxEnergy * boostThreshold)) // If under a certain threshold of energy reserves, boost is locked
+            {
+                maxSpeed = maxSpeedBoosted;
+                energyScriptRef.BoostCost();
+            }
+        }
+        else
+        {
+            maxSpeed = maxSpeedDefault;
+        }
+
+        // Steering
+        Vector3 steeringVector = new Vector3(0.0f, turnSpeed, 0.0f) * Time.deltaTime * leftStickAxisX;
+        transform.Rotate(steeringVector);
+        //rigidbodyRef.velocity = transform.forward * rigidbodyRef.velocity.magnitude; // <- gives better response to the steering but impedes jumping, rotation and gravity as they are all put into the same magnitud and directed forward
+
+        // Acceleration & deceleration
+        if (Mathf.Round(triggerAxis) < 0)
+        {
+            rigidbodyRef.velocity += transform.forward * move * trackOrAirMovement;
+        }
+        if (Mathf.Round(triggerAxis) > 0)
+        {
+            rigidbodyRef.velocity -= transform.forward * move * trackOrAirMovement; // change to be more like breaks
+        }
+
+        // 'On track' check
+        if (Physics.Raycast(rayCastObject.position, rayCastObject.up * -1, rayCastDistance, raycastLayermask))
+        {
+            OnTrackMovement();
+        }
+        else
+        {
+            // Roll
+            InAir();
+            // Energy attrition
+            energyScriptRef.AttritionDamage();
+        }
+
+        // Gravity
+        rigidbodyRef.velocity += gravityAcceleration * Time.deltaTime;
+
+        // Restrict velocity
+        Vector3 vel = rigidbodyRef.velocity;
+        if (vel.magnitude > maxSpeed)
+        {
+            vel.Normalize();
+            vel *= maxSpeed;
+            rigidbodyRef.velocity = vel;
+        }
+    }
+
+    void OnTrackMovement()
+    {
+        trackOrAirMovement = onTrackModifier;
+
+        // Jump
+        if (buttonA)
+        {
+            rigidbodyRef.AddForce(transform.up * jumpHeight);
+        }
+
+        // Tackle
+        if (leftButton)
+        {
+            rigidbodyRef.velocity -= transform.right * tackleModifier;
+        }
+        if (rightButton)
+        {
+            rigidbodyRef.velocity += transform.right * tackleModifier;
+        }
+    }
+
+    void InAir()
+    {
+        trackOrAirMovement = inAirModifier;
+
+        // Roll
+        Vector3 rotationVector = new Vector3(0.0f, 0.0f, -rotSpeed) * Time.deltaTime * rightStickAxisX;
+        transform.Rotate(rotationVector);
+
+        // Pitch
+        rotationVector = new Vector3(-rotSpeed, 0.0f, 0.0f) * Time.deltaTime * rightStickAxisY;
+        transform.Rotate(rotationVector);
+    }
+
+    public void Gravity(Vector3 directionalAcceleration)
+    {
+        gravityAcceleration = directionalAcceleration;
     }
 }
