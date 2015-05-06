@@ -126,15 +126,7 @@ public class VehicleMovement : MonoBehaviour
             maxSpeed = maxSpeedDefault;
         }
 
-        // Steering
-        if (leftStickAxisX != 0)
-        {
-            Vector3 steeringVector = new Vector3(0.0f, turnSpeed, 0.0f) * Time.deltaTime * leftStickAxisX;
-            transform.Rotate(steeringVector);
 
-            // Correction of direction of movement
-            rigidbodyRef.velocity = transform.forward * rigidbodyRef.velocity.magnitude;
-        }
         
         // Acceleration
         if(triggerAxis <= 0.0f)
@@ -148,16 +140,26 @@ public class VehicleMovement : MonoBehaviour
         {
             trackOrAirMovement = onTrackModifier;
 
+            // Steering on track
+            if (leftStickAxisX != 0)
+            {
+                Vector3 steeringVector = new Vector3(0.0f, turnSpeed, 0.0f) * Time.deltaTime * leftStickAxisX;
+                transform.Rotate(steeringVector);
+
+                // Correction of direction of movement
+                rigidbodyRef.velocity = transform.forward * rigidbodyRef.velocity.magnitude;
+            }
+
             // Jump
             if (buttonA)
             {
                 rigidbodyRef.velocity += transform.up * jumpHeight;
             }
 
-            // Strafe and tackle
+            // Strafe and tackle left
             if (leftButton)
             {
-                Debug.Log("LB");
+                //Debug.Log("LB");
                 rigidbodyRef.AddForce(-transform.right* tackleModifier);
 
                 if (timerLB <= 0.0f)
@@ -166,24 +168,26 @@ public class VehicleMovement : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("LB double");
+                    //Debug.Log("LB double");
                     if(tackleTimer <= 0.0f)
                     {
-                        Debug.Log("Tackle");
+                        //Debug.Log("Tackle");
                         tackleTimer = 1.0f;
                         rigidbodyRef.AddForce(-transform.right * tackleModifier * 2);
                         energyScriptRef.Immunity();
                     }
                     else
                     {
-                        Debug.Log("No Tackle");
+                        //Debug.Log("No Tackle");
                         rigidbodyRef.AddForce(-transform.right * tackleModifier);
                     }
                 }
             }
+
+            // Strafe and tackle right
             if (rightButton)
             {
-                Debug.Log("RB");
+                //Debug.Log("RB");
                 rigidbodyRef.AddForce(transform.right * tackleModifier);
 
                 if (timerRB <= 0.0f)
@@ -192,17 +196,17 @@ public class VehicleMovement : MonoBehaviour
                 }
                 else
                 {
-                    Debug.Log("RB double");
+                    //Debug.Log("RB double");
                     if (tackleTimer <= 0.0f)
                     {
-                        Debug.Log("Tackle");
+                        //Debug.Log("Tackle");
                         tackleTimer = 1.0f;
                         rigidbodyRef.AddForce(transform.right * tackleModifier * 2);
                         energyScriptRef.Immunity();
                     }
                     else
                     {
-                        Debug.Log("No Tackle");
+                        //Debug.Log("No Tackle");
                         rigidbodyRef.AddForce(transform.right * tackleModifier);
                     }
                 }
@@ -211,6 +215,13 @@ public class VehicleMovement : MonoBehaviour
         else
         {
             trackOrAirMovement = inAirModifier;
+
+            // Steering in air
+            if (leftStickAxisX != 0)
+            {
+                Vector3 steeringVector = new Vector3(0.0f, turnSpeed, 0.0f) * Time.deltaTime * leftStickAxisX;
+                transform.Rotate(steeringVector);
+            }
 
             // Roll
             Vector3 rotationVector = new Vector3(0.0f, 0.0f, -rotSpeed) * Time.deltaTime * rightStickAxisX;

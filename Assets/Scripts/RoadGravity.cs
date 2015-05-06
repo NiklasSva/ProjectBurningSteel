@@ -7,7 +7,7 @@ public class RoadGravity : MonoBehaviour
     private Dictionary<int, Transform> enteredObjects = new Dictionary<int,Transform>(); // Instance ID, Transform
 
     public float gravitationalAcceleration = 9.81f;
-    public float gravityMultiplier = 2.0f;
+    public float gravityMultiplier = 5.0f;
 
 
     void OnTriggerEnter(Collider other)
