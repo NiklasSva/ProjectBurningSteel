@@ -215,7 +215,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11447532, guid: d7b74e6e4db77a940afb8a352ccc06e2, type: 2}
       propertyPath: tackleModifier
-      value: 5000
+      value: 50000
       objectReference: {fileID: 0}
     - target: {fileID: 11427338, guid: d7b74e6e4db77a940afb8a352ccc06e2, type: 2}
       propertyPath: maxEnergy
@@ -1373,7 +1373,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11415876, guid: a2a6a1f51f1553f44bb9190d32194d29, type: 2}
       propertyPath: tackleModifier
-      value: 5000
+      value: 50000
       objectReference: {fileID: 0}
     - target: {fileID: 11420844, guid: a2a6a1f51f1553f44bb9190d32194d29, type: 2}
       propertyPath: maxEnergy

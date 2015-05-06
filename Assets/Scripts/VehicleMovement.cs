@@ -35,15 +35,11 @@ public class VehicleMovement : MonoBehaviour
     public float maxSpeedBoosted;
     private float maxSpeedDefault;
 
-    // Tackle
-    public float tackleTime         = 1.0f;
-    private float tackleTimer       = 0.0f;
+    //Tackle
+    private float timerLB = 0.0f;
+    private float timerRB = 0.0f;
 
-    private float doubleTapTimeLB   = 0.5f;
-    private float doubleTapTimerLB  = 0.0f;
-
-    private float doubleTapTimeRB   = 0.5f;
-    private float doubleTapTimerRB  = 0.0f;
+    private float tackleTimer = 0.0f;
 
     // Raycast
     public Transform rayCastObject;
@@ -51,31 +47,31 @@ public class VehicleMovement : MonoBehaviour
     public float rayCastDistance;
 
     // Input axis
-    private float leftStickAxisX    = 0.0f; // X axis
-    private float leftStickAxisY    = 0.0f; // Y axis
+    private float leftStickAxisX = 0.0f; // X axis
+    private float leftStickAxisY = 0.0f; // Y axis
 
-    private float triggerAxis   = 0.0f; // 3rd axis
+    private float triggerAxis = 0.0f; // 3rd axis
 
-    private float rightStickAxisX   = 0.0f; // 4th axis
-    private float rightStickAxisY   = 0.0f; // 5th axis
+    private float rightStickAxisX = 0.0f; // 4th axis
+    private float rightStickAxisY = 0.0f; // 5th axis
 
-    private float horizontal_Dpad   = 0.0f; // 6th axis
-    private float vertical_Dpad     = 0.0f; // 7th axis
+    private float horizontal_Dpad = 0.0f; // 6th axis
+    private float vertical_Dpad = 0.0f; // 7th axis
     
     // Input buttons
-    private bool buttonA = false; // 0
-    private bool buttonB = false; // 1
-    private bool buttonX = false; // 2
-    private bool buttonY = false; // 3
+    private bool buttonA = false; // 0 button
+    private bool buttonB = false; // 1 button
+    private bool buttonX = false; // 2 button
+    private bool buttonY = false; // 3 button
 
-    private bool leftButton     = false; // 4
-    private bool rightButton    = false; // 5
+    private bool leftButton = false; // 4 button
+    private bool rightButton = false; // 5 button
 
-    private bool backButton     = false; // 6
-    private bool startButton    = false; // 7
+    private bool backButton = false; // 6 button
+    private bool startButton = false; // 7 button
 
-    private bool leftStickButton    = false; // 8
-    private bool rightStickButton   = false; // 9
+    private bool leftStickButton = false; // 8 button
+    private bool rightStickButton = false; // 9 button
 
     //---------------------------------------------------------------------------------------
 
@@ -99,6 +95,20 @@ public class VehicleMovement : MonoBehaviour
 
     void RevisedMovement()
     {
+        // Timers
+        if (timerLB > 0.0f)
+        {
+            timerLB -= Time.deltaTime;
+        }
+        if(timerRB > 0.0f)
+        {
+            timerRB -= Time.deltaTime;
+        }
+        if(tackleTimer > 0.0f)
+        {
+            tackleTimer -= Time.deltaTime;
+        }
+
         // Gravity
         rigidbodyRef.AddForce(gravityAcceleration);
 
@@ -143,14 +153,59 @@ public class VehicleMovement : MonoBehaviour
             {
                 rigidbodyRef.velocity += transform.up * jumpHeight;
             }
-            // Tackle
+
+            // Strafe and tackle
             if (leftButton)
             {
-                rigidbodyRef.AddForce(-transform.right * tackleModifier);
+                Debug.Log("LB");
+                rigidbodyRef.AddForce(-transform.right* tackleModifier);
+
+                if (timerLB <= 0.0f)
+                {                   
+                    timerLB = 0.5f;
+                }
+                else
+                {
+                    Debug.Log("LB double");
+                    if(tackleTimer <= 0.0f)
+                    {
+                        Debug.Log("Tackle");
+                        tackleTimer = 1.0f;
+                        rigidbodyRef.AddForce(-transform.right * tackleModifier * 2);
+                        energyScriptRef.Immunity();
+                    }
+                    else
+                    {
+                        Debug.Log("No Tackle");
+                        rigidbodyRef.AddForce(-transform.right * tackleModifier);
+                    }
+                }
             }
             if (rightButton)
             {
+                Debug.Log("RB");
                 rigidbodyRef.AddForce(transform.right * tackleModifier);
+
+                if (timerRB <= 0.0f)
+                {
+                    timerRB = 0.5f;
+                }
+                else
+                {
+                    Debug.Log("RB double");
+                    if (tackleTimer <= 0.0f)
+                    {
+                        Debug.Log("Tackle");
+                        tackleTimer = 1.0f;
+                        rigidbodyRef.AddForce(transform.right * tackleModifier * 2);
+                        energyScriptRef.Immunity();
+                    }
+                    else
+                    {
+                        Debug.Log("No Tackle");
+                        rigidbodyRef.AddForce(transform.right * tackleModifier);
+                    }
+                }
             }
         }
         else
@@ -170,7 +225,8 @@ public class VehicleMovement : MonoBehaviour
         }
     }
 
-    // --------------------------------------------------
+    // -----------------------------------------------------------------------------
+
     // Jerry's test code:
     public Vector3 testVel;
     void AltMove()
@@ -309,8 +365,8 @@ public class VehicleMovement : MonoBehaviour
     void OldMovement()
     {
         float move = speed * Time.deltaTime;
-        if(tackleTimer > 0.0f)
-            tackleTimer -= Time.deltaTime;
+        //if(tackleTimer > 0.0f)
+            //tackleTimer -= Time.deltaTime;
 
 
 
@@ -393,7 +449,7 @@ public class VehicleMovement : MonoBehaviour
         }
 
         // Tackle
-        if (tackleTimer < 0.0f)
+        //if (tackleTimer < 0.0f)
         {
             
         }       
@@ -416,6 +472,8 @@ public class VehicleMovement : MonoBehaviour
     {
         gravityAcceleration = directionalAcceleration;
     }
+
+    // -----------------------------------------------------------------------------
 
     // Input values:
 
