@@ -946,7 +946,7 @@ Transform:
   m_LocalScale: {x: 200, y: 200, z: 200}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
 --- !u!1 &1301248551
 GameObject:
   m_ObjectHideFlags: 0
@@ -1337,7 +1337,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 446226, guid: a2a6a1f51f1553f44bb9190d32194d29, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1067
+      value: 1111
       objectReference: {fileID: 0}
     - target: {fileID: 446226, guid: a2a6a1f51f1553f44bb9190d32194d29, type: 2}
       propertyPath: m_LocalPosition.z

@@ -23,8 +23,8 @@ public class InputPlayer1 : MonoBehaviour
         vehicleMovementRef.ButtonA(Input.GetButton("A"));
         vehicleMovementRef.ButtonX(Input.GetButton("X"));
 
-        vehicleMovementRef.LeftButton(Input.GetButton("LB"));
-        vehicleMovementRef.RightButton(Input.GetButton("RB"));
+        vehicleMovementRef.LeftButton(Input.GetButtonDown("LB"));
+        vehicleMovementRef.RightButton(Input.GetButtonDown("RB"));
     }
 
         // Move this to another script?
