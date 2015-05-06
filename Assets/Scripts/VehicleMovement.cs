@@ -125,8 +125,6 @@ public class VehicleMovement : MonoBehaviour
         {
             maxSpeed = maxSpeedDefault;
         }
-
-
         
         // Acceleration
         if(triggerAxis <= 0.0f)
@@ -139,7 +137,7 @@ public class VehicleMovement : MonoBehaviour
         if (Physics.Raycast(rayCastObject.position, rayCastObject.up * -1, rayCastDistance, raycastLayermask))
         {
             trackOrAirMovement = onTrackModifier;
-
+            
             // Steering on track
             if (leftStickAxisX != 0)
             {
@@ -149,7 +147,7 @@ public class VehicleMovement : MonoBehaviour
                 // Correction of direction of movement
                 rigidbodyRef.velocity = transform.forward * rigidbodyRef.velocity.magnitude;
             }
-
+            
             // Jump
             if (buttonA)
             {
