@@ -9,6 +9,9 @@ public class EnergyScript : MonoBehaviour
     public float boostCostModifier = 5.0f;
     public float boostRechargeModifier = 20.0f;
     public float attritionModifier = 10.0f;
+    public float immunitDuration;
+
+    private float immunityTimer = 0.0f;
 
     void Start()
     {
@@ -16,6 +19,11 @@ public class EnergyScript : MonoBehaviour
     }
     void Update()
     {
+        if(immunityTimer > 0.0f)
+        {
+            immunityTimer -= Time.deltaTime;
+        }
+
         if (currentEnergy < 0.0f)
         {
             EnergyDeath();
@@ -25,14 +33,20 @@ public class EnergyScript : MonoBehaviour
     {
         if (other.gameObject.tag == "Player" || other.gameObject.tag == "Wall")
         {
-            currentEnergy -= attritionModifier;
+            if(immunityTimer <= 0.0f)
+            {
+                currentEnergy -= attritionModifier;
+            }            
         }
     }
     void OnCollisionStay(Collision other)
     {
         if (other.gameObject.tag == "Player" || other.gameObject.tag == "Wall")
         {
-            currentEnergy -= Time.deltaTime * attritionModifier;
+            if (immunityTimer <= 0.0f)
+            {
+                currentEnergy -= attritionModifier * Time.deltaTime;
+            }
         }
     }
 
@@ -50,6 +64,13 @@ public class EnergyScript : MonoBehaviour
         currentEnergy -= Time.deltaTime * attritionModifier;
     }
 
+    public void Immunity()
+    {
+        if(immunityTimer <= 0.0f)
+        {
+            immunityTimer = 0.5f;
+        }
+    }
 
     void EnergyDeath()
     {
