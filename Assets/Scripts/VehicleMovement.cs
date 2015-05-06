@@ -91,8 +91,122 @@ public class VehicleMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        OldMovement();
+        //OldMovement();
         //NewMovement();
+        //AltMove();
+        RevisedMovement();
+    }
+
+    void RevisedMovement()
+    {
+        // Gravity
+        rigidbodyRef.AddForce(gravityAcceleration);
+
+        // Boost
+        if (buttonX)
+        {
+            if (energyScriptRef.currentEnergy >= (energyScriptRef.maxEnergy * boostThreshold)) // If under a certain threshold of energy reserves, boost is locked
+            {
+                maxSpeed = maxSpeedBoosted;
+                energyScriptRef.BoostCost();
+            }
+        }
+        else
+        {
+            maxSpeed = maxSpeedDefault;
+        }
+
+        // Steering
+        if (leftStickAxisX != 0)
+        {
+            Vector3 steeringVector = new Vector3(0.0f, turnSpeed, 0.0f) * Time.deltaTime * leftStickAxisX;
+            transform.Rotate(steeringVector);
+
+            // Correction of direction of movement
+            rigidbodyRef.velocity = transform.forward * rigidbodyRef.velocity.magnitude;
+        }
+        
+        // Acceleration
+        if(triggerAxis <= 0.0f)
+            rigidbodyRef.AddForce(transform.forward * speed * -triggerAxis * trackOrAirMovement);
+
+        // Break
+        // ?
+
+        // On track?
+        if (Physics.Raycast(rayCastObject.position, rayCastObject.up * -1, rayCastDistance, raycastLayermask))
+        {
+            trackOrAirMovement = onTrackModifier;
+
+            // Jump
+            if (buttonA)
+            {
+                rigidbodyRef.velocity += transform.up * jumpHeight;
+            }
+            // Tackle
+            if (leftButton)
+            {
+                rigidbodyRef.AddForce(-transform.right * tackleModifier);
+            }
+            if (rightButton)
+            {
+                rigidbodyRef.AddForce(transform.right * tackleModifier);
+            }
+        }
+        else
+        {
+            trackOrAirMovement = inAirModifier;
+
+            // Roll
+            Vector3 rotationVector = new Vector3(0.0f, 0.0f, -rotSpeed) * Time.deltaTime * rightStickAxisX;
+            transform.Rotate(rotationVector);
+        }
+
+        // Restrict acceleration
+        if (acceleration.magnitude > maxSpeed)
+        {
+            acceleration.Normalize();
+            acceleration *= maxSpeed;
+        }
+    }
+
+    // --------------------------------------------------
+    // Jerry's test code:
+    public Vector3 testVel;
+    void AltMove()
+    {
+        if (leftStickAxisX != 0)
+        {
+            Vector3 steeringVector = new Vector3(0.0f, turnSpeed, 0.0f) * Time.deltaTime * leftStickAxisX;
+            transform.Rotate(steeringVector);
+
+            // Correction of direction of movement
+            Vector3 correction = transform.forward * (rigidbodyRef.velocity.magnitude);
+            
+            rigidbodyRef.velocity = correction;
+        }
+
+        if (Mathf.Round(triggerAxis) < 0)
+        {
+            rigidbodyRef.AddForce(transform.forward * speed);
+        }
+
+        if (Physics.Raycast(rayCastObject.position, rayCastObject.up * -1, rayCastDistance, raycastLayermask))
+        {
+            if (buttonA)
+            {
+                rigidbodyRef.velocity += transform.up * jumpHeight;
+            }
+            if (leftButton)
+            {
+                rigidbodyRef.AddForce(-transform.right * tackleModifier);
+            }
+            if (rightButton)
+            {
+                rigidbodyRef.AddForce(transform.right * tackleModifier);
+            }
+        }
+        rigidbodyRef.AddForce(-transform.up * 1000);
     }
 
     // -----------------------------------------------------------------------------
@@ -100,13 +214,17 @@ public class VehicleMovement : MonoBehaviour
     void NewMovement()
     {
         // Steering
-        Vector3 steeringVector = new Vector3(0.0f, turnSpeed, 0.0f) * Time.deltaTime * leftStickAxisX;
-        transform.Rotate(steeringVector);
+        
+        if (leftStickAxisX != 0)
+        {
+            Vector3 steeringVector = new Vector3(0.0f, turnSpeed, 0.0f) * Time.deltaTime * leftStickAxisX;
+            transform.Rotate(steeringVector);
 
-        // Correction of direction of movement
-        Vector3 correction = transform.forward * (rigidbodyRef.velocity.magnitude / 2);
-        rigidbodyRef.velocity = rigidbodyRef.velocity / 2;
-        rigidbodyRef.velocity += correction;
+            // Correction of direction of movement
+            Vector3 correction = transform.forward * (rigidbodyRef.velocity.magnitude / 2);
+            rigidbodyRef.velocity = rigidbodyRef.velocity / 2;
+            rigidbodyRef.velocity += correction;
+        }
 
         // Reset vectors
         acceleration        = Vector3.zero;
@@ -183,14 +301,13 @@ public class VehicleMovement : MonoBehaviour
         gravityEffect = gravityAcceleration * Time.deltaTime;
 
         // Add everything to velocity
-        rigidbodyRef.velocity += acceleration + jumpingAndTackling + gravityEffect;        
+        rigidbodyRef.velocity += acceleration + jumpingAndTackling + gravityEffect;
     }
 
     // -----------------------------------------------------------------------------
 
     void OldMovement()
     {
-        // dO.Ob
         float move = speed * Time.deltaTime;
         if(tackleTimer > 0.0f)
             tackleTimer -= Time.deltaTime;
@@ -384,7 +501,5 @@ public class VehicleMovement : MonoBehaviour
     public void RightStickButton(bool isPressed)
     {
         rightStickButton = isPressed;
-    }
-
-    
+    }    
 }

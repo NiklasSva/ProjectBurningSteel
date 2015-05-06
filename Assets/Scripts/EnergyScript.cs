@@ -25,7 +25,7 @@ public class EnergyScript : MonoBehaviour
     {
         if (other.gameObject.tag == "Player" || other.gameObject.tag == "Wall")
         {
-            currentEnergy -= attritionModifier;
+            Debug.Log("What?");
         }
     }
     void OnCollisionStay(Collision other)
