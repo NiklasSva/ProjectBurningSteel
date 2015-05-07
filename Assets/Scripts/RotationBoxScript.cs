@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 public class RotationBoxScript : MonoBehaviour 
 {
-    public float t = 1.0f;
+    public float rotationModifier = 1.0f;
     private Dictionary<int, Transform> enteredObjects = new Dictionary<int, Transform>(); // Instance ID, Transform
 
     void Update()
@@ -15,7 +15,7 @@ public class RotationBoxScript : MonoBehaviour
             //pair.Value.rotation = Quaternion.RotateTowards(pair.Value.rotation, this.transform.rotation, Time.deltaTime * t); 
             
             //pair.Value.rotation = Quaternion.Slerp(pair.Value.rotation, this.transform.rotation, Time.deltaTime * t);
-            pair.Value.rotation = Quaternion.Lerp(pair.Value.rotation, this.transform.rotation, Time.deltaTime * t); //faster but may look awkward depending on angle difference
+            pair.Value.rotation = Quaternion.Lerp(pair.Value.rotation, this.transform.rotation, Time.deltaTime * rotationModifier); //faster but may look awkward depending on angle difference
         }
     }
 

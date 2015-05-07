@@ -91,10 +91,10 @@ public class VehicleMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        OldMovement();
+        //OldMovement();
         //NewMovement();
         //AltMove();
-        //RevisedMovement();
+        RevisedMovement();
     }
 
     void RevisedMovement()
@@ -137,9 +137,6 @@ public class VehicleMovement : MonoBehaviour
             {
                 Vector3 steeringVector = new Vector3(0.0f, turnSpeed, 0.0f) * Time.deltaTime * leftStickAxisX;
                 transform.Rotate(steeringVector);
-
-                // Correction of direction of movement
-                rigidbodyRef.velocity = transform.forward * rigidbodyRef.velocity.magnitude;
             }
             
             // Jump
