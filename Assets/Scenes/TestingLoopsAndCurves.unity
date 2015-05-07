@@ -215,7 +215,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11447532, guid: d7b74e6e4db77a940afb8a352ccc06e2, type: 2}
       propertyPath: tackleModifier
-      value: 50000
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 11427338, guid: d7b74e6e4db77a940afb8a352ccc06e2, type: 2}
       propertyPath: maxEnergy
@@ -407,7 +407,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 492616, guid: f6fb72142a1b98f4f90b701f8f65ea70, type: 2}
       propertyPath: m_RootOrder
-      value: 13
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 11475960, guid: f6fb72142a1b98f4f90b701f8f65ea70, type: 2}
       propertyPath: gravityMultiplier
@@ -456,6 +456,58 @@ Prefab:
     - target: {fileID: 11477952, guid: f6fb72142a1b98f4f90b701f8f65ea70, type: 2}
       propertyPath: gravityMultiplier
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 448610, guid: f6fb72142a1b98f4f90b701f8f65ea70, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -1092
+      objectReference: {fileID: 0}
+    - target: {fileID: 448610, guid: f6fb72142a1b98f4f90b701f8f65ea70, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -4
+      objectReference: {fileID: 0}
+    - target: {fileID: 448610, guid: f6fb72142a1b98f4f90b701f8f65ea70, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -416
+      objectReference: {fileID: 0}
+    - target: {fileID: 476524, guid: f6fb72142a1b98f4f90b701f8f65ea70, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: -2962
+      objectReference: {fileID: 0}
+    - target: {fileID: 476524, guid: f6fb72142a1b98f4f90b701f8f65ea70, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 1536
+      objectReference: {fileID: 0}
+    - target: {fileID: 476524, guid: f6fb72142a1b98f4f90b701f8f65ea70, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 7904
+      objectReference: {fileID: 0}
+    - target: {fileID: 487078, guid: f6fb72142a1b98f4f90b701f8f65ea70, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 424
+      objectReference: {fileID: 0}
+    - target: {fileID: 487078, guid: f6fb72142a1b98f4f90b701f8f65ea70, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 50
+      objectReference: {fileID: 0}
+    - target: {fileID: 487078, guid: f6fb72142a1b98f4f90b701f8f65ea70, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -.0987119004
+      objectReference: {fileID: 0}
+    - target: {fileID: 487078, guid: f6fb72142a1b98f4f90b701f8f65ea70, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 487078, guid: f6fb72142a1b98f4f90b701f8f65ea70, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 487078, guid: f6fb72142a1b98f4f90b701f8f65ea70, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: .995116055
+      objectReference: {fileID: 0}
+    - target: {fileID: 487078, guid: f6fb72142a1b98f4f90b701f8f65ea70, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: -15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f6fb72142a1b98f4f90b701f8f65ea70, type: 2}
@@ -667,7 +719,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cca296ab0a2df99409ced637f7db554b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  t: 2
+  rotationModifier: 1
 --- !u!65 &635372424
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1152,7 +1204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cca296ab0a2df99409ced637f7db554b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  t: 2
+  rotationModifier: 1
 --- !u!65 &1450604337
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1513,7 +1565,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 11415876, guid: a2a6a1f51f1553f44bb9190d32194d29, type: 2}
       propertyPath: tackleModifier
-      value: 50000
+      value: 500
       objectReference: {fileID: 0}
     - target: {fileID: 11420844, guid: a2a6a1f51f1553f44bb9190d32194d29, type: 2}
       propertyPath: maxEnergy

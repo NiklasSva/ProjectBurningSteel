@@ -91,10 +91,10 @@ public class VehicleMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        //OldMovement();
+        OldMovement();
         //NewMovement();
         //AltMove();
-        RevisedMovement();
+        //RevisedMovement();
     }
 
     void RevisedMovement()
