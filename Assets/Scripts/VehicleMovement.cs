@@ -7,6 +7,10 @@ public class VehicleMovement : MonoBehaviour
     private Rigidbody rigidbodyRef;
     private EnergyScript energyScriptRef;
 
+    // Direction correction
+    private Vector3 currentDir;
+    private float movementAngle;
+
     // Trying to fix movement
     private Vector3 acceleration        = new Vector3(0.0f, 0.0f, 0.0f);
     private Vector3 jumpingAndTackling  = new Vector3(0.0f, 0.0f, 0.0f);
@@ -87,10 +91,10 @@ public class VehicleMovement : MonoBehaviour
 
     void FixedUpdate()
     {
-        //OldMovement();
+        OldMovement();
         //NewMovement();
         //AltMove();
-        RevisedMovement();
+        //RevisedMovement();
     }
 
     void RevisedMovement()
@@ -230,6 +234,11 @@ public class VehicleMovement : MonoBehaviour
             acceleration.Normalize();
             acceleration *= maxSpeed;
         }
+
+        // Prepare for next frame's direction correction
+        currentDir = rigidbodyRef.velocity;
+        // Angle between forward vector and current direction
+        movementAngle = Vector3.Angle(transform.forward, currentDir);
     }
 
     // -----------------------------------------------------------------------------
