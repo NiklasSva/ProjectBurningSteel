@@ -108,10 +108,7 @@ public class VehicleMovement : MonoBehaviour
         {
             tackleTimer -= Time.deltaTime;
         }
-
-        // Gravity
-        rigidbodyRef.AddForce(gravityAcceleration);
-
+        
         // Boost
         if (buttonX)
         {
@@ -126,13 +123,6 @@ public class VehicleMovement : MonoBehaviour
             maxSpeed = maxSpeedDefault;
         }
         
-        // Acceleration
-        if(triggerAxis <= 0.0f)
-            rigidbodyRef.AddForce(transform.forward * speed * -triggerAxis * trackOrAirMovement);
-
-        // Break
-        // ?
-
         // On track?
         if (Physics.Raycast(rayCastObject.position, rayCastObject.up * -1, rayCastDistance, raycastLayermask))
         {
@@ -225,6 +215,14 @@ public class VehicleMovement : MonoBehaviour
             Vector3 rotationVector = new Vector3(0.0f, 0.0f, -rotSpeed) * Time.deltaTime * rightStickAxisX;
             transform.Rotate(rotationVector);
         }
+
+        // Gravity
+        rigidbodyRef.AddForce(gravityAcceleration);
+
+        // Acceleration
+        if (triggerAxis <= 0.0f)
+            rigidbodyRef.AddForce(transform.forward * speed * -triggerAxis * trackOrAirMovement);
+        // Break goes here
 
         // Restrict acceleration
         if (acceleration.magnitude > maxSpeed)
