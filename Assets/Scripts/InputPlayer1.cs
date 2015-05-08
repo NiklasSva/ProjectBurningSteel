@@ -9,6 +9,8 @@ public class InputPlayer1 : MonoBehaviour
     void Start()
     {
         vehicleMovementRef = GetComponent<VehicleMovement>();
+        vehicleMovementRef.SetPlayerNR(1);
+
         energyScriptRef = GetComponent<EnergyScript>();
     }
 

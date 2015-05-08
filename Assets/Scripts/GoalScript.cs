@@ -13,7 +13,14 @@ public class GoalScript : MonoBehaviour
 
             if (other.GetComponent<PlayerScore>().laps >= winScore)
             {
-                Application.LoadLevel("FirstPlayableWin");
+                if(other.GetComponent<VehicleMovement>().GetPlayerNr() == 1)
+                {
+                    Application.LoadLevel("Player1Win");
+                }
+                else if(other.GetComponent<VehicleMovement>().GetPlayerNr() == 2)
+                {
+                    Application.LoadLevel("Player2Win");
+                }
             }
         }
     }

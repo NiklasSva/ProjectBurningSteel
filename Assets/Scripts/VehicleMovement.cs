@@ -7,6 +7,10 @@ public class VehicleMovement : MonoBehaviour
     private Rigidbody rigidbodyRef;
     private EnergyScript energyScriptRef;
 
+    // Player number
+
+    private int playerNR = 0;
+
     // Direction correction
     private Vector3 currentDir;
     private float movementAngle;
@@ -572,5 +576,17 @@ public class VehicleMovement : MonoBehaviour
     public void RightStickButton(bool isPressed)
     {
         rightStickButton = isPressed;
-    }    
+    }
+
+    // -----------------------------------------------------------------------------
+
+    public void SetPlayerNR(int number)
+    {
+        playerNR = number;
+    }
+
+    public int GetPlayerNr()
+    {
+        return playerNR;
+    }
 }
