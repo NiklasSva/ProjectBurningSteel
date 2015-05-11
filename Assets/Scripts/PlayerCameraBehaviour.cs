@@ -17,7 +17,7 @@ public class PlayerCameraBehaviour : MonoBehaviour
         newPosition.y = Mathf.Max(newPosition.y + distanceUp, minimumHeight);
 
         // Move the camera:
-        transform.position = Vector3.SmoothDamp(transform.position, newPosition, ref positionVelocity, 0.18f);
+        transform.position = Vector3.SmoothDamp(transform.position, newPosition, ref positionVelocity, 0.10f);
 
         // Rotate the camera to look at where the car is pointing:
         Vector3 focalPoint = target.position + (target.forward * 5);

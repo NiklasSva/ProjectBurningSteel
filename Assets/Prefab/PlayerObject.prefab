@@ -62,7 +62,7 @@ GameObject:
   - 124: {fileID: 12486014}
   - 92: {fileID: 9236146}
   - 81: {fileID: 8120210}
-  - 45: {fileID: 4581874}
+  - 114: {fileID: 11419892}
   m_Layer: 0
   m_Name: Camera
   m_TagString: Ignore
@@ -129,7 +129,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 174238}
   m_LocalRotation: {x: 0, y: .675590038, z: 0, w: -.737277508}
-  m_LocalPosition: {x: -11641.4004, y: 1105, z: -19818.3008}
+  m_LocalPosition: {x: -11641, y: 1111, z: -19818}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 472302}
@@ -249,14 +249,6 @@ MeshFilter:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 159662}
   m_Mesh: {fileID: 4300000, guid: 521a8b6d7500b404599e00064606d651, type: 3}
---- !u!45 &4581874
-Skybox:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 167084}
-  m_Enabled: 1
-  m_CustomSkybox: {fileID: 2100000, guid: 26d8bdbc8646bde48b05fbaacaaa6577, type: 2}
 --- !u!54 &5416278
 Rigidbody:
   m_ObjectHideFlags: 1
@@ -264,8 +256,8 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 174238}
   serializedVersion: 2
-  m_Mass: 5
-  m_Drag: .5
+  m_Mass: .5
+  m_Drag: 2
   m_AngularDrag: .0500000007
   m_UseGravity: 0
   m_IsKinematic: 0
@@ -290,7 +282,7 @@ AudioListener:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 167084}
-  m_Enabled: 0
+  m_Enabled: 1
 --- !u!92 &9236146
 Behaviour:
   m_ObjectHideFlags: 1
@@ -309,11 +301,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3d31ae9fb04bd3429d6f9e4296f1317, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3000
+  inAir: 0
+  speed: 5000
   turnSpeed: 100
   rotSpeed: 100
-  jumpHeight: 30000
-  tackleModifier: 100
+  jumpHeight: 5000
+  tackleModifier: 500
   onTrackModifier: 1
   inAirModifier: .00100000005
   maxSpeed: 4500
@@ -325,6 +318,22 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 16
   rayCastDistance: 100
+  testVel: {x: 0, y: 0, z: 0}
+--- !u!114 &11419892
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 167084}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2806ddf35e3cdce4cb48eaa6e471bcf7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  target: {fileID: 446226}
+  distanceUp: 100
+  distanceBack: -100
+  minimumHeight: 10
 --- !u!114 &11420844
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -341,6 +350,7 @@ MonoBehaviour:
   boostCostModifier: 5
   boostRechargeModifier: 20
   attritionModifier: 10
+  immunitDuration: 0
 --- !u!114 &11444206
 MonoBehaviour:
   m_ObjectHideFlags: 1
