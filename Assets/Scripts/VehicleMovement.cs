@@ -7,8 +7,10 @@ public class VehicleMovement : MonoBehaviour
     private Rigidbody rigidbodyRef;
     private EnergyScript energyScriptRef;
 
-    // Player number
+    // camera
+    public bool inAir = false;
 
+    // Player number
     private int playerNR = 0;
 
     // Direction correction
@@ -134,6 +136,7 @@ public class VehicleMovement : MonoBehaviour
         // On track?
         if (Physics.Raycast(rayCastObject.position, rayCastObject.up * -1, rayCastDistance, raycastLayermask))
         {
+            inAir = false;
             trackOrAirMovement = onTrackModifier;
             
             // Steering on track
@@ -207,6 +210,7 @@ public class VehicleMovement : MonoBehaviour
         }
         else
         {
+            inAir = true;
             trackOrAirMovement = inAirModifier;
 
             // Steering in air
