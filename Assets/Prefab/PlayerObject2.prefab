@@ -50,25 +50,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!1 &171394
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 404822}
-  - 20: {fileID: 2063796}
-  - 124: {fileID: 12461210}
-  - 92: {fileID: 9213944}
-  - 81: {fileID: 8107360}
-  m_Layer: 0
-  m_Name: Camera
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
 --- !u!1 &174238
 GameObject:
   m_ObjectHideFlags: 0
@@ -120,18 +101,6 @@ Transform:
   m_Children:
   - {fileID: 448680}
   m_Father: {fileID: 446226}
-  m_RootOrder: 2
---- !u!4 &404822
-Transform:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 171394}
-  m_LocalRotation: {x: .0871557519, y: 0, z: 0, w: .99619472}
-  m_LocalPosition: {x: 0, y: 117, z: -173.100006}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 446226}
   m_RootOrder: 1
 --- !u!4 &446226
 Transform:
@@ -144,7 +113,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 472302}
-  - {fileID: 404822}
   - {fileID: 400850}
   - {fileID: 457038}
   m_Father: {fileID: 0}
@@ -172,7 +140,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 446226}
-  m_RootOrder: 3
+  m_RootOrder: 2
 --- !u!4 &472302
 Transform:
   m_ObjectHideFlags: 1
@@ -185,38 +153,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 446226}
   m_RootOrder: 0
---- !u!20 &2063796
-Camera:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 171394}
-  m_Enabled: 1
-  serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: .192156866, g: .301960796, b: .474509805, a: .0196078438}
-  m_NormalizedViewPortRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: .5
-  near clip plane: .300000012
-  far clip plane: 50000
-  field of view: 90
-  orthographic: 0
-  orthographic size: 5
-  m_Depth: 0
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
-  m_HDR: 0
-  m_OcclusionCulling: 1
-  m_StereoConvergence: 10
-  m_StereoSeparation: .0219999999
 --- !u!23 &2316324
 MeshRenderer:
   m_ObjectHideFlags: 1
@@ -255,8 +191,8 @@ Rigidbody:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 174238}
   serializedVersion: 2
-  m_Mass: 5
-  m_Drag: .5
+  m_Mass: .5
+  m_Drag: 2
   m_AngularDrag: .0500000007
   m_UseGravity: 0
   m_IsKinematic: 0
@@ -275,20 +211,6 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 100, y: 20, z: 135}
   m_Center: {x: 0, y: 12, z: 32}
---- !u!81 &8107360
-AudioListener:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 171394}
-  m_Enabled: 0
---- !u!92 &9213944
-Behaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 171394}
-  m_Enabled: 0
 --- !u!114 &11427338
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -305,6 +227,7 @@ MonoBehaviour:
   boostCostModifier: 5
   boostRechargeModifier: 20
   attritionModifier: 10
+  immunitDuration: 0
 --- !u!114 &11428502
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -327,11 +250,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d3d31ae9fb04bd3429d6f9e4296f1317, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3000
+  inAir: 0
+  speed: 5000
   turnSpeed: 100
   rotSpeed: 100
-  jumpHeight: 30000
-  tackleModifier: 100
+  jumpHeight: 5000
+  tackleModifier: 500
   onTrackModifier: 1
   inAirModifier: .00100000005
   maxSpeed: 4500
@@ -343,6 +267,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 16
   rayCastDistance: 100
+  testVel: {x: 0, y: 0, z: 0}
 --- !u!114 &11453590
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -393,13 +318,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   laps: 0
---- !u!124 &12461210
-Behaviour:
-  m_ObjectHideFlags: 1
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 171394}
-  m_Enabled: 1
 --- !u!136 &13699476
 CapsuleCollider:
   m_ObjectHideFlags: 1
