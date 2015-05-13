@@ -139,16 +139,40 @@ Material:
         second: 0
       data:
         first:
+          name: _ScanlineOpacity
+        second: .512000024
+      data:
+        first:
           name: _Opacity
         second: .631067872
       data:
         first:
-          name: _ScanlineOpacity
+          name: _DesaturationAmount
+        second: 1
+      data:
+        first:
+          name: _LeftrightSpeed
+        second: -5.9000001
+      data:
+        first:
+          name: _node_2452
+        second: 0
+      data:
+        first:
+          name: _Scanlineexp
+        second: 5.17000008
+      data:
+        first:
+          name: _FuzzyPower
         second: .5
       data:
         first:
-          name: _DesaturationAmount
-        second: 1
+          name: _FuzzyPowernoise
+        second: .5
+      data:
+        first:
+          name: _node_2559
+        second: 1.5
     m_Colors:
       data:
         first:
